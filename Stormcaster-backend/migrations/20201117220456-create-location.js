@@ -1,24 +1,27 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('games', {
+    await queryInterface.createTable('locations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      lid: {
+        type: Sequelize.UUID
+      },
+      zipcode: {
+        type: Sequelize.INTEGER
+      },
+      city: {
         type: Sequelize.STRING
       },
-      publisher: {
-        type: Sequelize.STRING
+      state: {
+        type: Sequelize.CHAR
       },
-      coverArtUrl: {
-        type: Sequelize.STRING
-      },
-      completed: {
-        type: Sequelize.BOOLEAN
+      coords: {
+        type: Sequelize.ARRAY
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +34,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('games');
+    await queryInterface.dropTable('locations');
   }
 };
