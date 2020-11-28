@@ -3,7 +3,6 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Routes from './config/routes'
 import UserModel from './models/user';
-import './App.css'
 
 function App() {
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
@@ -17,6 +16,7 @@ function App() {
     e.preventDefault();
     localStorage.removeItem('id');
 
+    // eslint-disable-next-line no-unused-vars
     UserModel.logout().then(res => {
       setCurrentUser(null)
       

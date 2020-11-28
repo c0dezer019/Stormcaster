@@ -2,13 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 // import { Route, Link, Switch } from 'react-router-dom';
-import { Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import {
-    Container,
-    OutlinedInput,
-    Button,
-    FormControl,
-} from '@material-ui/core';
+import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OutlinedInput, Button, FormControl } from '@material-ui/core';
 
 import { AccountCircleOutlined } from '@material-ui/icons';
 import logo from '../images/stormcaster_logo_light.png';
@@ -39,8 +34,8 @@ const Header = props => {
     }, [notifications]);
 
     return (
-        <Container>
-            <Navbar expand="lg" id="header" bg="secondary" variant="dark">
+        <Navbar expand="lg" id="header" bg="secondary" variant="dark">
+            <Container>
                 <Navbar.Brand href="#home" id="brand">
                     <img id="logo" src={logo} alt="logo" />
                 </Navbar.Brand>
@@ -51,12 +46,11 @@ const Header = props => {
                         searchQuery: q,
                     }}
                     onSubmit={async value => {
-                        await new Promise (r => setTimeout(r, 500));
+                        await new Promise(r => setTimeout(r, 500));
                         const formattedQ = value.replace(/\s/g, '+');
                         setQ(formattedQ);
                     }}
-                    handleChange={values => setQ(values.searchQuery)}
-                 >
+                    handleChange={values => setQ(values.searchQuery)}>
                     {({ isSubmitting, values, handleChange }) => (
                         <Form>
                             <FormControl variant="outlined">
@@ -122,8 +116,8 @@ const Header = props => {
                         </Container>
                     </Container>
                 </Container>
-            </Navbar>
-        </Container>
+            </Container>
+        </Navbar>
     );
 };
 
