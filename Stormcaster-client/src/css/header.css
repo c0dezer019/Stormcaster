@@ -52,11 +52,6 @@ header .container:first-child {
   margin: 0;
 }
 
-#search {
-  width: 170px;
-  height: 5px;
-}
-
 #q {
   color: #e4d5d5;
 }
