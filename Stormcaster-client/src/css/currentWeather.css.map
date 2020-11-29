@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"currentWeather.css"}
+{"version":3,"sourceRoot":"","sources":["../sass/partials/_variables.sass"],"names":[],"mappings":"AAQA","file":"currentWeather.css"}
