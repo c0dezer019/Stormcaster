@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Formik, Form } from 'formik';
+
 import PropTypes from 'prop-types';
 // import { Route, Link, Switch } from 'react-router-dom';
 import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -10,12 +10,12 @@ import logo from '../images/stormcaster_logo_light.png';
 import alertInactive from '../images/alert_inactive.png';
 import alertActive from '../images/alert_active.png';
 import hazard from '../images/hazard.png';
+import '../css/header.css'
 
 const Header = props => {
     const { advisories, notifs } = props;
     const [adv, setAdv] = useState(advisories);
     const [notifications, setNotifications] = useState(notifs);
-    const [q, setQ] = useState('');
 
     useEffect(() => {
         console.log('state change');
@@ -41,18 +41,7 @@ const Header = props => {
                 </Navbar.Brand>
 
                 {/* SEARCH */}
-                <Formik
-                    initialValues={{
-                        searchQuery: q,
-                    }}
-                    onSubmit={async value => {
-                        await new Promise(r => setTimeout(r, 500));
-                        const formattedQ = value.replace(/\s/g, '+');
-                        setQ(formattedQ);
-                    }}
-                    handleChange={values => setQ(values.searchQuery)}>
-                    {({ isSubmitting, values, handleChange }) => (
-                        <Form>
+                        <form>
                             <FormControl variant="outlined">
                                 <>
                                     {['right'].map(placement => (
@@ -72,8 +61,6 @@ const Header = props => {
                                                 type="text"
                                                 placeholder="Location"
                                                 name="search"
-                                                onChange={handleChange}
-                                                value={values.searchQuery}
                                             />
                                         </OverlayTrigger>
                                     ))}
@@ -81,14 +68,11 @@ const Header = props => {
                             </FormControl>
 
                             <Button
-                                disabled={isSubmitting}
                                 type="submit"
                                 variant="text">
                                 <span id="q">Search</span>
                             </Button>
-                        </Form>
-                    )}
-                </Formik>
+                        </form>
 
                 {/* NOTIFICATIONS/PROFILE */}
                 <Container id="profile-section">
