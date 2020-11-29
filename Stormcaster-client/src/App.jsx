@@ -6,6 +6,7 @@ import UserModel from './models/user';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
+  const [query, setQuery] = useState('');
 
   const storeUser = (userId) => {
     setCurrentUser({ currentUser: userId });
@@ -23,10 +24,15 @@ function App() {
     });
   }
 
+  const formatQuery = (q) => {
+    const newQuery = q.replace(/\s/g, '+');
+    setQuery(newQuery);
+  }
+
   return (
     <div className="App">
-      <Header currentUser={currentUser} logout={logout}/>
-      <Routes currentUser={currentUser} storeUser={storeUser} />
+      <Header currentUser={currentUser} logout={logout} formatQuery={formatQuery} />
+      <Routes currentUser={currentUser} storeUser={storeUser} query={query} />
       <Footer />
     </div>
   );
