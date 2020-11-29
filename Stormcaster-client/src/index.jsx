@@ -5,10 +5,8 @@ import App from './App';
 import './css/index.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>  
-      <App />
-    </Router>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Router>
+        <App />
+    </Router>,
+    document.getElementById('root')
 );
