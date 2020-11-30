@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
-import { AppContext } from '../state/AppContext';
+import { LocaleContext } from '../state/LocaleContext';
 
 // Doesn't return anything, this simply converts the entered query into acceptable parameters for OWM.
 const LocaleConversion = () => {
-    const { query, setCoords, setQuery } = useContext(AppContext);
+    const { query, setCoords, setQuery } = useContext(LocaleContext);
 
     const convertToCoords = async q => {
         const fetchCoords = await fetch(
@@ -22,7 +22,7 @@ const LocaleConversion = () => {
             }
         }, [query]);
 
-    return null;
+    return (null);
 };
 
 export default LocaleConversion;
