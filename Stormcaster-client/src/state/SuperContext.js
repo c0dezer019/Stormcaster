@@ -1,14 +1,12 @@
 import React from 'react';
 
 export const SuperContext = React.createContext({
-	coords: {},
+	coords: '',
 	currentMessage: '',
-	firstRender: true,
 	query: '',
-	weatherData: {},
+	weatherData: '',
 	setCoords: () => {},
 	setCurrentMessage: () => {},
-	setFirstRender: () => {},
 	setQuery: () => {},
 	setWeatherData: () => {},
 });

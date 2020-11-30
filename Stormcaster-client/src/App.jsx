@@ -11,7 +11,7 @@ function App() {
     const [currentMessage, setCurrentMessage] = useState('');
     const [firstRender, setFirstRender] = useState('');
     const [query, setQuery] = useState('');
-    const [weatherData, setWeatherData] = useState({});
+    const [weatherData, setWeatherData] = useState('');
     const value = {
         query,
         setQuery,
