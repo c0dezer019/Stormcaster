@@ -6,7 +6,7 @@ import UserModel from './models/user';
 import { SuperContext } from './state/SuperContext';
 
 function App() {
-    const [coords, setCoords] = useState('');
+    const [coords, setCoords] = useState({});
     const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
     const [currentMessage, setCurrentMessage] = useState('');
     const [firstRender, setFirstRender] = useState('');
