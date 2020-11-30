@@ -1,13 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Container } from '@material-ui/core';
-import WeatherProvider from '../components/weather/WeatherProvider';
-import { LocaleContext } from '../state/LocaleContext';
+import { SuperContext } from '../state/SuperContext';
 import CurrentForecast from '../components/weather/CurrentForecast';
 
 const Home = () => {
-    const { coords, setCoords, firstRender, setFirstRender } = useContext(LocaleContext);
-    const location = useLocation();
+    const { coords, setCoords } = useContext(SuperContext);
 
     let isGeolocationSupported = false;
 
@@ -28,16 +25,10 @@ const Home = () => {
     };
 
     useEffect(() => {
-        if (coords === '' && firstRender) {
+        if (coords === '') {
             getLocation();
-            setFirstRender(false)
-            console.log(isGeolocationSupported);
         }
     }, []);
-
-    useEffect(() => {
-        setFirstRender(true);
-    }, [location.pathname]);
 
     return (
         <Container maxWidth="xl">
@@ -57,8 +48,7 @@ const Home = () => {
                     </p>
                 </>
             )}
-            <LocaleContext />
-            <WeatherProvider />
+           
             <CurrentForecast />
         </Container>
     );
