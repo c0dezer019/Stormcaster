@@ -3,18 +3,27 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Routes from './config/routes';
 import UserModel from './models/user';
-import { LocaleContext } from './state/LocaleContext';
-import { WeatherContext } from './state/WeatherContext';
+import { SuperContext } from './state/SuperContext';
 
 function App() {
     const [coords, setCoords] = useState('');
     const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
     const [currentMessage, setCurrentMessage] = useState('');
-    const [firstRender, setFirstRender] = useState(true);
+    const [firstRender, setFirstRender] = useState('');
     const [query, setQuery] = useState('');
     const [weatherData, setWeatherData] = useState({});
-    const value = { query, setQuery, coords, setCoords, firstRender, setFirstRender };
-    const wthrValue = { weatherData, setWeatherData, currentMessage, setCurrentMessage };
+    const value = {
+        query,
+        setQuery,
+        coords,
+        setCoords,
+        firstRender,
+        setFirstRender,
+        weatherData,
+        setWeatherData,
+        currentMessage,
+        setCurrentMessage,
+    };
 
     const storeUser = userId => {
         setCurrentUser({ currentUser: userId });
@@ -33,12 +42,10 @@ function App() {
 
     return (
         <div className="App">
-            <LocaleContext.Provider value={value}>
-                <WeatherContext.Provider value={wthrValue}>
-                    <Header currentUser={currentUser} logout={logout} />
-                    <Routes currentUser={currentUser} storeUser={storeUser} />
-                </WeatherContext.Provider>
-            </LocaleContext.Provider>
+            <SuperContext.Provider value={value}>
+                <Header currentUser={currentUser} logout={logout} />
+                <Routes currentUser={currentUser} storeUser={storeUser} />
+            </SuperContext.Provider>
             <Footer />
         </div>
     );
