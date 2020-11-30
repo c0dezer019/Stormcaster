@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
-import { LocaleContext } from '../state/LocaleContext';
+import { SuperContext } from '../state/SuperContext';
 
 // Doesn't return anything, this simply converts the entered query into acceptable parameters for OWM.
 const LocaleConversion = () => {
-    const { query, setCoords, setQuery } = useContext(LocaleContext);
+    const { query, setCoords, setQuery } = useContext(SuperContext);
 
     const convertToCoords = async q => {
         const fetchCoords = await fetch(

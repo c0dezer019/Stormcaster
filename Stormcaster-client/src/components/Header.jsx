@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Container, Form, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { TextField, Button, FormControl } from '@material-ui/core';
 import { AccountCircleOutlined } from '@material-ui/icons';
-import { LocaleContext } from '../state/LocaleContext';
+import { SuperContext } from '../state/SuperContext';
 
 import logo from '../images/stormcaster_logo_light.png';
 import alertInactive from '../images/alert_inactive.png';
@@ -12,7 +12,7 @@ import alertInactive from '../images/alert_inactive.png';
 import '../css/header.css';
 
 const Header = () => {
-    const { setQuery } = useContext(LocaleContext);
+    const { setQuery } = useContext(SuperContext);
     
     // const [adv, setAdv] = useState(advisories);
     // const [notifications, setNotifications] = useState(notifs);
