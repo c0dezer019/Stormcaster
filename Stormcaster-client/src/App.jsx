@@ -7,12 +7,14 @@ import { LocaleContext } from './state/LocaleContext';
 import { WeatherContext } from './state/WeatherContext';
 
 function App() {
-    const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
-    const [query, setQuery] = useState('');
     const [coords, setCoords] = useState('');
+    const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
+    const [currentMessage, setCurrentMessage] = useState('');
+    const [firstRender, setFirstRender] = useState(true);
+    const [query, setQuery] = useState('');
     const [weatherData, setWeatherData] = useState({});
     const value = { query, setQuery, coords, setCoords, firstRender, setFirstRender };
-    const wthrValue = { weatherData, setWeatherData };
+    const wthrValue = { weatherData, setWeatherData, currentMessage, setCurrentMessage };
 
     const storeUser = userId => {
         setCurrentUser({ currentUser: userId });
