@@ -49,16 +49,11 @@ const Home = () => {
             console.log(isGeolocationSupported);
         }
     }, []);
-
+   
     return (
         <Container maxWidth="xl">
-            {isGeolocationSupported ? (
-                <>
-                    <p>
-                        lat: {coords.lat} lon: {coords.lng}
-                    </p>
-                </>
-            ) : (
+            {isGeolocationSupported ?
+                null : (
                 <>
                     <p>
                         Geolocation is not supported by this browser, please
@@ -68,17 +63,8 @@ const Home = () => {
                     </p>
                 </>
             )}
-
-            {Object.keys(coords).length > 0 ? (
                 <CurrentForecast coords={coords} />
-            ) : (
-                <>
-                    <p>
-                        For some reason things aren&apos;t loading right. Please
-                        refresh.
-                    </p>
-                </>
-            )}
+            
         </Container>
     );
 };
