@@ -7,31 +7,11 @@ import { SuperContext } from '../state/SuperContext';
 
 import logo from '../images/stormcaster_logo_light.png';
 import alertInactive from '../images/alert_inactive.png';
-// import alertActive from '../images/alert_active.png';
-// import hazard from '../images/hazard.png';
 import '../css/header.css';
 
 const Header = () => {
     const { setQuery } = useContext(SuperContext);
     
-    // const [adv, setAdv] = useState(advisories);
-    // const [notifications, setNotifications] = useState(notifs);
-
-    /* useEffect(() => {
-        console.log('state change');
-    }, [adv]);
-
-    useEffect(() => {
-        console.log('state change');
-    }, [notifications]);
-
-    useEffect(() => {
-        setAdv(advisories);
-    }, [advisories]);
-
-    useEffect(() => {
-        setNotifications(notifs);
-    }, [notifications]); */
     
     const handleSubmit = e => {
         e.preventDefault();
