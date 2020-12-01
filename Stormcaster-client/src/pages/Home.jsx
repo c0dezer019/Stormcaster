@@ -36,7 +36,6 @@ const Home = () => {
     const getLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setPosition, getLost);
-            console.log(isGeolocationSupported);
             isGeolocationSupported = true;
         } else {
             isGeolocationSupported = false;
@@ -46,7 +45,6 @@ const Home = () => {
     useEffect(() => {
         if (Object.keys(coords).length === 0) {
             getLocation();
-            console.log(isGeolocationSupported);
         }
     }, []);
    
