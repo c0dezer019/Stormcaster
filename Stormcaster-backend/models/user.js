@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     msgIds: DataTypes.ARRAY(DataTypes.INTEGER),
     birthdate: DataTypes.INTEGER,
     zipcode: DataTypes.INTEGER,
-    locations: DataTypes.ARRAY(DataTypes.INTEGER),
+    locations: DataTypes.ARRAY(DataTypes.TEXT),
     settings: DataTypes.JSON
   }, {
     sequelize,
