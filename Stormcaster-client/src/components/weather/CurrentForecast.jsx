@@ -3,13 +3,21 @@ import { Container } from '@material-ui/core';
 import Summary from '../subcomponents/weather_components/Summary';
 import '../../css/currentWeather.css';
 
-import { dJAPI, oWAPI } from '../../config/axios';
+import { dJAPI, oWAPI, geoAPI } from '../../config/axios';
 import { SuperContext } from '../../state/SuperContext';
 
 const CurrentForecast = () => {
     const [weatherData, setWeatherData] = useState({});
     const [message, setMessage] = useState('');
-    const { coords } = useContext(SuperContext);
+    const { coords, query, setCoords, location } = useContext(SuperContext);
+
+    const getLocation = async () => {
+        const localeData = await geoAPI({
+            url: `/geocode?q=${query}&api_key=${process.env.REACT_APP_GEO_KEY}`,
+        });
+
+        setCoords(localeData.data.results[0].location);
+    };
 
     const fetchData = async () => {
         const wthrData = await oWAPI({
@@ -17,8 +25,8 @@ const CurrentForecast = () => {
         });
         const msgData = await dJAPI();
 
-        setWeatherData(wthrData);
-        setMessage(msgData)
+        setWeatherData(wthrData.data);
+        setMessage(msgData.data.joke);
     };
 
     useEffect(async () => {
@@ -28,13 +36,11 @@ const CurrentForecast = () => {
     }, [coords]);
 
     useEffect(() => {
-        if (Object.keys(weatherData).length !== 0 && message !== '') {
-            const updateInterval = setInterval(() => {
-                fetchData();
-            }, 10000);
+        const updateInterval = setInterval(() => {
+            fetchData();
+        }, 600000);
 
-            clearInterval(updateInterval)
-        }
+        return () => clearInterval(updateInterval);
     }, []);
 
     if (!weatherData.current) {
@@ -43,7 +49,7 @@ const CurrentForecast = () => {
 
     return (
         <Container maxWidth="xl">
-            <Summary weatherData={weatherData} msg={message} />
+            <Summary weatherData={weatherData} msg={message} loc={location} />
         </Container>
     );
 };

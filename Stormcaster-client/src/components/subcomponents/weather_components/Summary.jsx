@@ -1,15 +1,26 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container } from '@material-ui/core';
 
-const Summary = ({ weatherData, msg }) => {
+const Summary = ({ weatherData, msg, loc }) => {
+    const [timeOfDay, setTimeOfDay] = useState('day')
+
     if (!weatherData.current) {
         return null;
     }
 
     const { current, minutely, hourly, daily } = weatherData;
-    const weatherIcon = `wi wi-owm-${current.weather[0].id}`;
+    const weatherIcon = `wi wi-owm-${timeOfDay}-${current.weather[0].id}`;
+    const windIcon = `wi wi-wind towards-${current.wind_deg}`;
+
+    // Toggles between day/night icons
+    const tODSwitcher = () => {
+        if (current.dt >= current.sunrise && current.dt < current.sunset) {
+            setTimeOfDay('day');
+        } else {
+            setTimeOfDay('night');
+        }
+    };
 
     const convertDegrees = deg => {
         const directionalArr = [
@@ -36,11 +47,14 @@ const Summary = ({ weatherData, msg }) => {
         return directionalArr[calcDirValue % 16];
     };
 
-    const windIcon = `wi wi-wind towards-${current.wind_deg}`
+    useEffect(() => {
+        tODSwitcher();
+    }, [current.dt]);
 
     return (
         <Box id="summary-cntr" display="flex" justifyContent="center">
             <section>
+                <h3>Graham, TX</h3>
                 <div id="weather-icon">
                     <i className={weatherIcon} id="weather-i"></i>
                 </div>

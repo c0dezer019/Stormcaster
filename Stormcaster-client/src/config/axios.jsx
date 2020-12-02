@@ -10,3 +10,8 @@ export const oWAPI = axios.create({
 	method: 'get',
 	baseURL: `${process.env.REACT_APP_OWM_URL}`
 });
+
+export const geoAPI = axios.create({
+	method: 'get',
+	baseURL: `${process.env.REACT_APP_GEO_URL}`
+});

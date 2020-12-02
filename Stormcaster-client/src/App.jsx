@@ -13,6 +13,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
     const [currentMessage, setCurrentMessage] = useState('');
     const [firstRender, setFirstRender] = useState('');
+    const [location, setLocation] = useState('');
     const [query, setQuery] = useState('');
     const [weatherData, setWeatherData] = useState('');
     const value = {
@@ -26,6 +27,8 @@ function App() {
         setWeatherData,
         currentMessage,
         setCurrentMessage,
+        location,
+        setLocation
     };
 
     const storeUser = userId => {

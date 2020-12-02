@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 // import { Link } from 'react-router-dom';
-import { Container, Form, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { TextField, Button, FormControl } from '@material-ui/core';
 import { AccountCircleOutlined } from '@material-ui/icons';
 import { SuperContext } from '../state/SuperContext';
@@ -10,13 +10,14 @@ import alertInactive from '../images/alert_inactive.png';
 import '../css/header.css';
 
 const Header = () => {
-    const { setQuery } = useContext(SuperContext);
+    const { setQuery, setLocation } = useContext(SuperContext);
     
     
     const handleSubmit = e => {
         e.preventDefault();
         const formattedQuery = e.target.search.value.replace(/\s/g, '+');
         setQuery(formattedQuery);
+        setLocation(e.target.search.value);
     };
 
     return (
@@ -27,7 +28,7 @@ const Header = () => {
                 </Navbar.Brand>
 
                 {/* SEARCH */}
-                <Form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <FormControl variant="outlined">
                         <>
                             {['left'].map(placement => (
@@ -57,7 +58,7 @@ const Header = () => {
                     <Button type="submit" variant="text">
                         <span id="q">Search</span>
                     </Button>
-                </Form>
+                </form>
 
                 {/* NOTIFICATIONS/PROFILE */}
                 <Container id="profile-section">
