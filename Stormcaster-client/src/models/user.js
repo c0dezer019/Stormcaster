@@ -1,33 +1,26 @@
-const REACT_APP_API_URL = 'http://localhost:4000/api/v1';
+import { backendPOST, backendDELETE } from '../config/axios';
 
 export default class UserModel {
 	static create(data) {
-		return fetch(`${REACT_APP_API_URL}/auth/register`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		}).then((res) => res.json());
+		return backendPOST({
+			url: `/auth/register`,
+			data: JSON.stringify(data),
+		});
 	}
 
 	static login(credentials) {
-		return fetch(`${REACT_APP_API_URL}/auth/login`,
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(credentials),
-				credentials: 'include'
+		return backendPOST({
+				url: `/auth/login`,
+				data: JSON.stringify(credentials),
+				withCredentials: true
 			}
-		).then(res => res.json());
+		);
 	}
 
 	static logout() {
-		return (`${REACT_APP_API_URL}/auth/logout`, {
-			method: "DELETE",
-			credentials: 'include'
+		return backendDELETE({
+			url: `/auth/logout`,
+			withCredentials: true
 		})
 	}
 }

@@ -43,6 +43,7 @@ module.exports = {
       'array-element-newline': ["error", {
           "ArrayExpression": "consistent",
           "ArrayPattern": { "minItems": 20 }
-      }]
+      }],
+      'no-plusplus': 0
   },
 };
