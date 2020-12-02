@@ -1,43 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container } from '@material-ui/core';
 import Summary from '../subcomponents/weather_components/Summary';
-import '../../css/currentWeather.css'
+import '../../css/currentWeather.css';
 
 import { dJAPI, oWAPI } from '../../config/axios';
+import { SuperContext } from '../../state/SuperContext';
 
-const CurrentForecast = props => {
-    const { coords } = props;
+const CurrentForecast = () => {
     const [weatherData, setWeatherData] = useState({});
     const [message, setMessage] = useState('');
+    const { coords } = useContext(SuperContext);
 
-    const fetchWeatherData = async () => {
+    const fetchData = async () => {
         const wthrData = await oWAPI({
-            url: `/onecall?lat=${coords.lat}&lon=${coords.lng}&units=imperial&appid=${process.env.REACT_APP_OWM_KEY}`
+            url: `/onecall?lat=${coords.lat}&lon=${coords.lng}&units=imperial&appid=${process.env.REACT_APP_OWM_KEY3}`,
         });
-
-        return wthrData;
-    };
-
-    const fetchMessage = async () => {
         const msgData = await dJAPI();
 
-        return msgData;
-    } 
+        setWeatherData(wthrData);
+        setMessage(msgData)
+    };
 
     useEffect(async () => {
         if (Object.keys(coords).length !== 0) {
-            const data = await fetchWeatherData();
-            setWeatherData(data.data);
+            fetchData();
         }
-        const msg = await fetchMessage();
-        setMessage(msg.data.joke);
     }, [coords]);
+
+    useEffect(() => {
+        if (Object.keys(weatherData).length !== 0 && message !== '') {
+            const updateInterval = setInterval(() => {
+                fetchData();
+            }, 10000);
+
+            clearInterval(updateInterval)
+        }
+    }, []);
 
     if (!weatherData.current) {
         return null;
-    } 
+    }
 
-    return ( 
+    return (
         <Container maxWidth="xl">
             <Summary weatherData={weatherData} msg={message} />
         </Container>

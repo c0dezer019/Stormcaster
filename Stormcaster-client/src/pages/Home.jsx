@@ -47,8 +47,6 @@ const Home = () => {
             getLocation();
         }
     }, []);
-   
-    console.log(coords)
     
     return (
         <Container maxWidth="xl">
@@ -63,7 +61,7 @@ const Home = () => {
                     </p>
                 </>
             )}
-                <CurrentForecast coords={coords} />
+                <CurrentForecast />
             
         </Container>
     );
