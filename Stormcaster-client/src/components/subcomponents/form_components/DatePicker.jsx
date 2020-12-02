@@ -3,7 +3,17 @@ import { Form, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const DatePicker = ({ register }) => {
+    const [age, setAge] = useState(0);
     const [selectedDate, setSelectedDate] = useState('');
+
+    const calculateAge = () => {
+        const currentDate = new Date();
+        const userAge = Math.floor(
+            (currentDate - selectedDate) / 1000 / 60 / 60 / 24 / 365
+        );
+        setAge(userAge);
+    };
+
     return (
         <Form.Row>
             <Form.Group as={Col} id="form-age">
@@ -27,7 +37,7 @@ const DatePicker = ({ register }) => {
                     type="hidden"
                     name="userAge"
                     ref={register}
-                    value={userAge}
+                    value={age}
                     plaintext
                     readOnly
                 />

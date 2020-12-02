@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Col, Container } from 'react-bootstrap';
 import { Button } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
@@ -9,6 +9,11 @@ import { Username, Password, Email } from './subcomponents/form_components';
 
 import '../css/registration.css';
 import 'react-datepicker/dist/react-datepicker.css';
+
+
+/* =============================================
+=            Schema            =
+============================================= */
 
 const schema = yup.object().shape({
     username: yup
@@ -40,24 +45,16 @@ const schema = yup.object().shape({
     age: yup.number().min(13).required(),
 });
 
-const RegistrationForm = () => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+/* =============================================
+=            Form            =
+============================================= */
 
+const RegistrationForm = () => {
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
 
     const onSubmit = data => console.log(data);
-
-    let userAge;
-
-    const calculateAge = () => {
-        const currentDate = new Date();
-        const age = Math.floor(
-            (currentDate - selectedDate) / 1000 / 60 / 60 / 24 / 365
-        );
-        userAge = age;
-    };
 
     useEffect(() => {
         console.log(errors);
