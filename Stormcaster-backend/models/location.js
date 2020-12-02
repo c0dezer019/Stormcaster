@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     zipcode: DataTypes.INTEGER,
     city: DataTypes.STRING,
     state: DataTypes.CHAR,
-    coords: DataTypes.ARRAY
+    coords: DataTypes.ARRAY(DataTypes.JSON)
   }, {
     sequelize,
     modelName: 'location',

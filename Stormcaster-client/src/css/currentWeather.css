@@ -1,3 +1,42 @@
 /* Registration Form */
+#current-temp {
+  font-size: 2.5em;
+}
+#current-temp #fahr {
+  font-size: 1em;
+}
+
+#weather-icon {
+  transform: scale(5);
+  position: absolute;
+  left: 30%;
+  top: 40%;
+}
+
+#summary-cntr {
+  position: relative;
+  margin-top: 10%;
+}
+#summary-cntr section {
+  width: 100%;
+}
+#summary-cntr section #msg {
+  width: 50%;
+  margin: auto;
+}
+#summary-cntr section #summary-text {
+  text-align: center;
+  width: 50%;
+}
+#summary-cntr section #summary-text span {
+  margin: 5px;
+}
+#summary-cntr section #summary-text #current-temp span {
+  margin: 0;
+}
+
+.wi {
+  color: blue;
+}
 
 /*# sourceMappingURL=currentWeather.css.map */

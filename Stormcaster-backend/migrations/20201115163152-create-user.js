@@ -33,7 +33,7 @@ module.exports = {
         }
       },
       msgIds: {
-        type: Sequelize.ARRAY(Sequelize.UUID)
+        type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
       birthdate: {
         type: Sequelize.STRING,
@@ -48,11 +48,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       locations: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.ARRAY(Sequelize.TEXT)
       },
       settings: {
         type: Sequelize.JSON,
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

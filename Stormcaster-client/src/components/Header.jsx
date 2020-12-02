@@ -1,43 +1,23 @@
 import React, { useContext } from 'react';
 // import { Link } from 'react-router-dom';
-import { Container, Form, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { TextField, Button, FormControl } from '@material-ui/core';
 import { AccountCircleOutlined } from '@material-ui/icons';
-import { AppContext } from '../state/AppContext';
+import { SuperContext } from '../state/SuperContext';
 
 import logo from '../images/stormcaster_logo_light.png';
 import alertInactive from '../images/alert_inactive.png';
-// import alertActive from '../images/alert_active.png';
-// import hazard from '../images/hazard.png';
 import '../css/header.css';
 
 const Header = () => {
-    const { query, setQuery } = useContext(AppContext);
+    const { setQuery, setLocation } = useContext(SuperContext);
     
-    // const [adv, setAdv] = useState(advisories);
-    // const [notifications, setNotifications] = useState(notifs);
-
-    /* useEffect(() => {
-        console.log('state change');
-    }, [adv]);
-
-    useEffect(() => {
-        console.log('state change');
-    }, [notifications]);
-
-    useEffect(() => {
-        setAdv(advisories);
-    }, [advisories]);
-
-    useEffect(() => {
-        setNotifications(notifs);
-    }, [notifications]); */
     
     const handleSubmit = e => {
         e.preventDefault();
         const formattedQuery = e.target.search.value.replace(/\s/g, '+');
         setQuery(formattedQuery);
-        console.log(query);
+        setLocation(e.target.search.value);
     };
 
     return (
@@ -48,7 +28,7 @@ const Header = () => {
                 </Navbar.Brand>
 
                 {/* SEARCH */}
-                <Form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <FormControl variant="outlined">
                         <>
                             {['left'].map(placement => (
@@ -78,7 +58,7 @@ const Header = () => {
                     <Button type="submit" variant="text">
                         <span id="q">Search</span>
                     </Button>
-                </Form>
+                </form>
 
                 {/* NOTIFICATIONS/PROFILE */}
                 <Container id="profile-section">

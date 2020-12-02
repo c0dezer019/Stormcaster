@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.CHAR
       },
       coords: {
-        type: Sequelize.ARRAY
+        type: Sequelize.ARRAY(Sequelize.JSON)
       },
       createdAt: {
         allowNull: false,

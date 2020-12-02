@@ -1,0 +1,9 @@
+MVP:
+	 □  Add means to display current weather data.
+	 □  Add registration form and make it functional.
+	 □  Add a login screen and functionality.
+	 □  Add means for user to search for different locations.
+	 □  Make it possible to save locations searched for.
+	 □  Create a list of saved locations
+	 □  Add an ability for saved locations to be removed.
+	 □  Log weather data of each fetch event.

@@ -3,13 +3,33 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Routes from './config/routes';
 import UserModel from './models/user';
-import { AppContext } from './state/AppContext';
+import { SuperContext } from './state/SuperContext';
+
+import "./css/weather-icons.min.css"
+import "./css/weather-icons-wind.min.css"
 
 function App() {
+    const [coords, setCoords] = useState({});
     const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
+    const [currentMessage, setCurrentMessage] = useState('');
+    const [firstRender, setFirstRender] = useState('');
+    const [location, setLocation] = useState('');
     const [query, setQuery] = useState('');
-    const [coords, setCoords] = useState('');
-    const value = {query, setQuery, coords, setCoords };
+    const [weatherData, setWeatherData] = useState('');
+    const value = {
+        query,
+        setQuery,
+        coords,
+        setCoords,
+        firstRender,
+        setFirstRender,
+        weatherData,
+        setWeatherData,
+        currentMessage,
+        setCurrentMessage,
+        location,
+        setLocation
+    };
 
     const storeUser = userId => {
         setCurrentUser({ currentUser: userId });
@@ -28,10 +48,10 @@ function App() {
 
     return (
         <div className="App">
-            <AppContext.Provider value={value}>
+            <SuperContext.Provider value={value}>
                 <Header currentUser={currentUser} logout={logout} />
                 <Routes currentUser={currentUser} storeUser={storeUser} />
-            </AppContext.Provider>
+            </SuperContext.Provider>
             <Footer />
         </div>
     );
