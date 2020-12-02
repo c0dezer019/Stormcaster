@@ -1,68 +1,81 @@
-const db = require('../models')
+const db = require('../models');
+
+
+const index = async ( res) => {
+	const allLocations = await db.location.findAll();
+
+	if (!allLocations)
+		return res.json({
+			message: 'No location data found.',
+		});
+
+	res.status(200).json({ locations: allLocations });
+};
+
+const show = async (req, res) => {
+	const localeData = await db.location.findByPk(req.params.id);
+
+	if (Object.keys(localeData).length === 0 || !localeData)
+		return res.json({
+			message: 'No location data found',
+		});
+
+	res.status(200).json({ location: localeData });
+};
 
 //working
-const index = (req, res) => {
-    db.game.findAll().then((foundGames) => {
-        if(!foundGames) return res.json({
-            message: 'No Games found in database.'
-        })
-
-        res.status(200).json({ games: foundGames });
+const create = async (req, res) => {
+    const newLocale = await db.location.create(req.body);
+    
+    const user = db.user.find({
+        where: { username: req.user.username }
     })
-}
 
-//not working
-const show = (req, res) => {
-  console.log('in the show route')
-  console.log(req.params)
-  //not sure React side?
-    db.game.findByPk(req.params.id).then((foundGame) => {
-        if (!foundGame) return res.json({
-            message: 'Game with provided ID not found.'
-        })
-        
-        res.status(200).json({ game: foundGame })
-    })
-}
+	if (res.status === 401)
+		return res.json({
+			message: 'Unable to create new location',
+		});
 
-//working
-const create = (req, res) => {
-    db.game.create(req.body).then((savedGame) => {
-        // Validations and error handling here
-        res.status(200).json({ game: savedGame })
-    })
-}
+	res.status(200).json({ location: newLocale });
+};
 
 //not sure need to get show page working first
-const update = (req, res) => {
-    db.game.update({
-      ...req.body
-    }, {
-      where: {
-        id: req.params.id
-      }
-    }).then((updatedGame) => {
-        if (!updatedGame) return res.json({
-            message: "No game with that ID found."
-        })
-        // Validations and error handling here
-        res.status(200).json({ game: updatedGame })
+const update = async (req, res) => {
+    const location = await db.location.find({
+        where: { id: req.params.id }
     })
-}
+
+    if (!location) return res.json({ message: "Unable to find location" });
+    
+    location.update(
+        {
+            ...req.body
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+    )
+
+	res.status(200).json({ location: updatedLocation });
+};
+
 //not sure
 const destroy = (req, res) => {
-    db.game.destroy({
-      where: { id: req.params.id }
-    }).then(() => {
-        res.status(200)
-    })
-}
-
+	db.game
+		.destroy({
+			where: { id: req.params.id },
+		})
+		.then(() => {
+			res.status(200);
+		});
+};
 
 module.exports = {
-    index,
-    show,
-    create,
-    update,
-    destroy
-}
+	index,
+	show,
+	create,
+	update,
+	destroy,
+};
