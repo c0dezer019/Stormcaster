@@ -9,14 +9,30 @@ import { SuperContext } from '../../state/SuperContext';
 const CurrentForecast = () => {
     const [weatherData, setWeatherData] = useState({});
     const [message, setMessage] = useState('');
-    const { coords, query, setCoords, location } = useContext(SuperContext);
+    const { coords, query, setCoords, location, setLocation } = useContext(SuperContext);
 
-    const getLocation = async () => {
+    const getLocation = async (type, params) => {
+        let q;
+
+        if (!params) {
+            q = `${query}`;
+        } else {
+            q = `${params}`;
+        }
+
         const localeData = await geoAPI({
-            url: `/geocode?q=${query}&api_key=${process.env.REACT_APP_GEO_KEY}`,
+            url: `/${type}?q=${q}&api_key=${process.env.REACT_APP_GEO_KEY}`,
         });
 
-        setCoords(localeData.data.results[0].location);
+        const { city, state, zip } = localeData.data.results[0].address_components;
+
+        if (location !== '') {
+            setCoords(localeData.data.results[0].location);
+        } else {
+            setLocation(`${city} ${state}, ${zip}`);
+        }
+
+        
     };
 
     const fetchData = async () => {
@@ -34,6 +50,15 @@ const CurrentForecast = () => {
             fetchData();
         }
     }, [coords]);
+
+    useEffect(() => {
+        if (query !== '') {
+            getLocation('geocode');
+
+        } else if (Object.keys(coords).length !== 0) {
+            getLocation(`reverse`, `${coords.lat},${coords.lng}`);
+        }
+    }, [query])
 
     useEffect(() => {
         const updateInterval = setInterval(() => {

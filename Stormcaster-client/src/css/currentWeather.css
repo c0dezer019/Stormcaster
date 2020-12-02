@@ -18,6 +18,7 @@
   margin-top: 10%;
 }
 #summary-cntr section {
+  text-align: center;
   width: 100%;
 }
 #summary-cntr section #msg {
@@ -25,7 +26,6 @@
   margin: auto;
 }
 #summary-cntr section #summary-text {
-  text-align: center;
   width: 50%;
 }
 #summary-cntr section #summary-text span {

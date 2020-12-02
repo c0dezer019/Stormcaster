@@ -54,7 +54,7 @@ const Summary = ({ weatherData, msg, loc }) => {
     return (
         <Box id="summary-cntr" display="flex" justifyContent="center">
             <section>
-                <h3>Graham, TX</h3>
+                <h3>{loc}</h3>
                 <div id="weather-icon">
                     <i className={weatherIcon} id="weather-i"></i>
                 </div>
