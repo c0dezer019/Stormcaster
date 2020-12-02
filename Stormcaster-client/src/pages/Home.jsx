@@ -48,6 +48,8 @@ const Home = () => {
         }
     }, []);
    
+    console.log(coords)
+    
     return (
         <Container maxWidth="xl">
             {isGeolocationSupported ?

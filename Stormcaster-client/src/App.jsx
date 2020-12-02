@@ -5,6 +5,9 @@ import Routes from './config/routes';
 import UserModel from './models/user';
 import { SuperContext } from './state/SuperContext';
 
+import "./css/weather-icons.min.css"
+import "./css/weather-icons-wind.min.css"
+
 function App() {
     const [coords, setCoords] = useState({});
     const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));

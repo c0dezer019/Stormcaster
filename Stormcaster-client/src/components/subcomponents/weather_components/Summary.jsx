@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 
 const Summary = ({ weatherData, msg }) => {
     if (!weatherData.current) {
@@ -9,6 +9,7 @@ const Summary = ({ weatherData, msg }) => {
     }
 
     const { current, minutely, hourly, daily } = weatherData;
+    const weatherIcon = `wi wi-owm-${current.weather[0].id}`;
 
     const convertDegrees = deg => {
         const directionalArr = [
@@ -29,37 +30,48 @@ const Summary = ({ weatherData, msg }) => {
             'NW',
             'NNW',
         ];
+
         const calcDirValue = Math.floor(deg / 22.5 + 0.5);
 
         return directionalArr[calcDirValue % 16];
     };
 
+    const windIcon = `wi wi-wind towards-${current.wind_deg}`
+
     return (
-        <Container id="summary-cntr" maxWidth="lg">
+        <Box id="summary-cntr" display="flex" justifyContent="center">
             <section>
-                <div id="weather_icon">
-                    <img src="" alt="Weather icon" />
+                <div id="weather-icon">
+                    <i className={weatherIcon} id="weather-i"></i>
                 </div>
                 <Container id="summary-text">
-                    <div id="currentTemp">
-                        <span>{current.temp}&deg; F</span>
+                    <div id="current-temp">
+                        <span>{Math.round(current.temp)}</span>
+                        <span id="fahr">
+                            <i className="wi wi-fahrenheit"></i>
+                        </span>
                     </div>
                     <p id="desc1">
-                        {current.feels_like}&deg;,&nbsp;
+                        Feels like {Math.round(current.feels_like)}
+                        <i className="wi wi-fahrenheit"></i>,&nbsp;
                         {current.weather[0].description}
                     </p>
                     <p id="desc2">
                         <span>
-                            {current.wind_speed} MPH{' '}
-                            {convertDegrees(current.wind_deg)} /
+                            {Math.round(current.wind_speed)} MPH&nbsp;
+                            {convertDegrees(current.wind_deg)} with gusts up to{' '}
+                            {Math.round(current.wind_gust)} MPH
                         </span>
-                        <span>Humidity: {current.humidity}% /</span>
+                    </p>
+                    <p>
+                        <span>Humidity: {current.humidity}%</span>
                         <span>UV: {current.uvi}</span>
                     </p>
+
                     <p id="msg">{msg}</p>
                 </Container>
             </section>
-        </Container>
+        </Box>
     );
 };
 
