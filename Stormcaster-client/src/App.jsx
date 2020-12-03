@@ -1,47 +1,19 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useContext } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Routes from './config/routes';
 import UserModel from './models/user';
 import { SuperContext } from './state/SuperContext';
 
-import "./css/weather-icons.min.css"
-import "./css/weather-icons-wind.min.css"
+import './css/weather-icons.min.css';
+import './css/weather-icons-wind.min.css';
 
 function App() {
-    const [coords, setCoords] = useState({});
-    const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
-    const [currentMessage, setCurrentMessage] = useState('');
-    const [date, setDate] = useState(new Date());
-    const [firstRender, setFirstRender] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState('');
-    const [location, setLocation] = useState('');
-    const [query, setQuery] = useState('');
-    const [weatherData, setWeatherData] = useState('');
-    const [regFormOpen, setRegFormOpen] = useState(false);
-    const value = {
-        coords,
-        currentMessage,
-        date,
-        isSubmitting,
-        firstRender,
-        location,
-        query,
-        regFormOpen,
-        weatherData,
-        setCoords,
-        setCurrentMessage,
-        setDate,
-        setFirstRender,
-        setIsSubmitting,
-        setLocation,
-        setQuery,
-        setRegFormOpen,
-        setWeatherData,
-    };
+    const [currentUser, setCurrentUser] = useContext(SuperContext);
 
     const storeUser = userId => {
-        setCurrentUser({ currentUser: userId });
+        setCurrentUser(userId);
         localStorage.setItem('id', userId);
     };
 
@@ -49,7 +21,6 @@ function App() {
         e.preventDefault();
         localStorage.removeItem('id');
 
-        // eslint-disable-next-line no-unused-vars
         UserModel.logout().then(res => {
             setCurrentUser(null);
         });
@@ -57,10 +28,8 @@ function App() {
 
     return (
         <div className="App">
-            <SuperContext.Provider value={value}>
-                <Header currentUser={currentUser} logout={logout} />
-                <Routes currentUser={currentUser} storeUser={storeUser} />
-            </SuperContext.Provider>
+            <Header logout={logout} />
+            <Routes storeUser={storeUser} />
             <Footer />
         </div>
     );
