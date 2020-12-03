@@ -10,7 +10,7 @@ import './css/weather-icons.min.css';
 import './css/weather-icons-wind.min.css';
 
 function App() {
-    const [currentUser, setCurrentUser] = useContext(SuperContext);
+    const { setCurrentUser } = useContext(SuperContext);
 
     const storeUser = userId => {
         setCurrentUser(userId);

@@ -18,11 +18,10 @@ export const geoAPI = axios.create({
 
 export const backendPOST = axios.create({
 	method: 'post',
-	baseURL: `${process.env.REACT_APP_BACKEND}`,
-	headers: {
-		"Content-Type": "application/json"
-	}
+	baseURL: `${process.env.REACT_APP_BACKEND}`
 });
+
+backendPOST.defaults.headers.common['Content-Type'] = 'application/json'
 
 export const backendDELETE = axios.create({
 	method: 'delete',

@@ -1,9 +1,9 @@
 import React, { useState, createContext } from 'react';
 
 export const SuperContext = createContext({
-    coords: '',
+    coords: {},
     currentMessage: '',
-    currentUser: '',
+    currentUser: localStorage.getItem('id'),
     date: new Date(),
     firstRender: true,
     isSubmitting: false,
@@ -35,7 +35,7 @@ export const SuperProvider = ({ children }) => {
     const [weatherData, setWeatherData] = useState('');
 	const [regFormOpen, setRegFormOpen] = useState(false);
 
-	const value = [
+	const value = {
         coords,
         currentMessage,
         currentUser,
@@ -56,7 +56,7 @@ export const SuperProvider = ({ children }) => {
         setQuery,
         setRegFormOpen,
         setWeatherData,
-	];
+    };
 	
 	return (
 		<SuperContext.Provider value={value}>

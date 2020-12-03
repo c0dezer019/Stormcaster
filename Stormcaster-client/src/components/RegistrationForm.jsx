@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -52,23 +53,28 @@ const schema = yup.object().shape({
 =            Form            =
 ============================================= */
 
-const RegistrationForm = ({ history }) => {
-    // const { isSubmitting, setIsSubmitting } = useContext(SuperContext);
+const RegistrationForm = props => {
+    const history = useHistory();
+    const { currentUser, setCurrentUser } = useContext(SuperContext);
 
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data, e) => {
+    const onSubmit = async (data, e) => {
         e.preventDefault();
         console.log(data);
-        UserModel.create({
+        const user = await UserModel.create({
             username: data.username,
             password: data.password,
             email: data.email,
             age: data.age
         });
-        history.push('/login');
+        setCurrentUser(user)
+        localStorage.setItem('id', user.id)
+        console.log(localStorage)
+        history.push('/');
+        console.log(currentUser)
     };
 
     /*   useEffect(() => {

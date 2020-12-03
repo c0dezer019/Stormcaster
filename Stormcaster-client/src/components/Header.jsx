@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 // import { Link } from 'react-router-dom';
 import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -16,10 +16,9 @@ import logo from '../images/stormcaster_logo_light.png';
 import alertInactive from '../images/alert_inactive.png';
 import '../css/header.css';
 
-const Header = ({ currentUser, logout }) => {
-    const { setQuery, setLocation } = useContext(SuperContext);
+const Header = ({ logout }) => {
+    const { setQuery, setLocation, currentUser } = useContext(SuperContext);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [auth, setAuth] = useState(false);
     const open = Boolean(anchorEl);
 
     /* const handleClickOpen = () => {
@@ -40,14 +39,6 @@ const Header = ({ currentUser, logout }) => {
         setQuery(formattedQuery);
         setLocation(e.target.search.value);
     };
-
-    useEffect(() => {
-        if (currentUser) {
-            setAuth(true);
-        } else {
-            setAuth(false);
-        }
-    }, [currentUser]);
 
     return (
         <Navbar expand="lg" id="header" bg="secondary" variant="dark">
@@ -121,15 +112,12 @@ const Header = ({ currentUser, logout }) => {
                                 }}
                                 open={open}
                                 onClose={handleMenuClose}>
-                                {auth ? (
+                                {currentUser ? (
                                     <div>
                                         <MenuItem
                                             component="a"
                                             id="logout"
-                                            onClick={() => {
-                                                handleMenuClose();
-                                                logout();
-                                            }}
+                                            onClick={logout}
                                             to="/logout">
                                             Logout
                                         </MenuItem>

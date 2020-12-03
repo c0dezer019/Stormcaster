@@ -1,30 +1,37 @@
 /* eslint-disable consistent-return */
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import UserModel from '../models/user';
 
-const Login = ({ history, storeUser }) => {
+const Login = ({ storeUser }) => {
+    const history = useHistory();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleChange = e => {
-        setUsername(e.target.value);
-        setPassword(e.target.value);
+        if (e.target.id === 'username') {
+            setUsername(e.target.value);
+        } else {
+            setPassword(e.target.value);
+        }
     };
 
-    const handleSubmit = event => {
-        event.preventDefault();
+    const handleSubmit = async e => {
+        e.preventDefault();
 
-        UserModel.login(username, password)
-            .then(data => {
-                console.log(data);
+        const creds = { username, password };
+        const user = await UserModel.login(creds);
 
-                if (!data.user) {
-                    return false;
-                }
-                storeUser(data.user);
-                history.push('/profile');
-            })
-            .catch(err => console.log(err));
+        try {
+            if (!user) {
+                return false;
+            }
+            storeUser(user.user);
+            console.log(user);
+            history.push('/profile');
+        } catch (err) {
+            console.log(err.message);
+        }
     };
 
     return (
@@ -33,7 +40,7 @@ const Login = ({ history, storeUser }) => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username">
-                        Email
+                        Username
                         <input
                             onChange={handleChange}
                             type="text"
