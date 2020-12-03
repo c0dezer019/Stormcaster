@@ -12,23 +12,29 @@ function App() {
     const [coords, setCoords] = useState({});
     const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
     const [currentMessage, setCurrentMessage] = useState('');
+    const [date, setDate] = useState(new Date());
     const [firstRender, setFirstRender] = useState('');
     const [location, setLocation] = useState('');
     const [query, setQuery] = useState('');
     const [weatherData, setWeatherData] = useState('');
+    const [regFormOpen, setRegFormOpen] = useState(false);
     const value = {
-        query,
-        setQuery,
         coords,
-        setCoords,
-        firstRender,
-        setFirstRender,
-        weatherData,
-        setWeatherData,
         currentMessage,
-        setCurrentMessage,
+        date,
+        firstRender,
         location,
-        setLocation
+        query,
+        regFormOpen,
+        weatherData,
+        setCoords,
+        setCurrentMessage,
+        setDate,
+        setFirstRender,
+        setLocation,
+        setQuery,
+        setRegFormOpen,
+        setWeatherData,
     };
 
     const storeUser = userId => {

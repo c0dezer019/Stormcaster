@@ -1,7 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { TextField, Button, FormControl } from '@material-ui/core';
+import {
+    TextField,
+    Button,
+    FormControl,
+    Menu,
+    MenuItem
+} from '@material-ui/core';
 import { AccountCircleOutlined } from '@material-ui/icons';
 import { SuperContext } from '../state/SuperContext';
 
@@ -9,16 +15,38 @@ import logo from '../images/stormcaster_logo_light.png';
 import alertInactive from '../images/alert_inactive.png';
 import '../css/header.css';
 
-const Header = () => {
-    const { setQuery, setLocation } = useContext(SuperContext);
-    
-    
+const Header = ({ currentUser, logout }) => {
+    const { setQuery, setLocation, setRegFormOpen } = useContext(SuperContext);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [auth, setAuth] = useState(false);
+    const open = Boolean(anchorEl);
+
+    const handleClickOpen = () => {
+        setRegFormOpen(true);
+    };
+
+    const handleMenu = e => {
+        setAnchorEl(e.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
     const handleSubmit = e => {
         e.preventDefault();
         const formattedQuery = e.target.search.value.replace(/\s/g, '+');
         setQuery(formattedQuery);
         setLocation(e.target.search.value);
     };
+
+    useEffect(() => {
+        if (currentUser) {
+            setAuth(true);
+        } else {
+            setAuth(false);
+        }
+    }, [currentUser]);
 
     return (
         <Navbar expand="lg" id="header" bg="secondary" variant="dark">
@@ -71,19 +99,48 @@ const Header = () => {
                     </Container>
                     <Container className="profile_item" id="notifications">
                         <img src={alertInactive} alt="No Alerts" />
-                        {/* <>
-                            {notifs.length !== 0 ? (
-                                <>
-                                    <img src={alertActive} alt="Active alert" />
-                                </>
-                            ) : (
-                                <>
-                                    <img src={alertInactive} alt="No Alerts" />
-                                </>
-                            )}
-                        </> */}
                         <Container className="profile_item" id="profile-bubble">
-                            <AccountCircleOutlined id="profile-bubble" />
+                            <AccountCircleOutlined
+                                id="profile-bubble"
+                                onClick={handleMenu}
+                            />
+                            <Menu
+                                id="navbar-menu"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={handleMenuClose}>
+                                {auth ? (
+                                    <>
+                                        <MenuItem
+                                            id="logout"
+                                            href="/logout"
+                                            onClick={() => {
+                                                handleMenuClose();
+                                                logout();
+                                            }}>
+                                            Logout
+                                        </MenuItem>
+                                    </>
+                                ) : (
+                                    <>
+                                        <MenuItem id="login">Login</MenuItem>
+                                        <MenuItem
+                                            id="register"
+                                            onClick={handleClickOpen}>
+                                            Register
+                                        </MenuItem>
+                                    </>
+                                )}
+                            </Menu>
                         </Container>
                     </Container>
                 </Container>
