@@ -35,4 +35,4 @@ Email.propTypes = {
 	register: PropTypes.func.isRequired,
 };
 
-export { Email };
+export default Email;

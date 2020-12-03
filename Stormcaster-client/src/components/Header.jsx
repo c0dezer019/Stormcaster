@@ -119,7 +119,7 @@ const Header = ({ currentUser, logout }) => {
                                 open={open}
                                 onClose={handleMenuClose}>
                                 {auth ? (
-                                    <>
+                                    <div>
                                         <MenuItem
                                             id="logout"
                                             href="/logout"
@@ -129,16 +129,16 @@ const Header = ({ currentUser, logout }) => {
                                             }}>
                                             Logout
                                         </MenuItem>
-                                    </>
+                                    </div>
                                 ) : (
-                                    <>
+                                    <div>
                                         <MenuItem id="login">Login</MenuItem>
                                         <MenuItem
                                             id="register"
                                             onClick={handleClickOpen}>
                                             Register
                                         </MenuItem>
-                                    </>
+                                    </div>
                                 )}
                             </Menu>
                         </Container>

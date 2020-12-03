@@ -14,6 +14,7 @@ function App() {
     const [currentMessage, setCurrentMessage] = useState('');
     const [date, setDate] = useState(new Date());
     const [firstRender, setFirstRender] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState('');
     const [location, setLocation] = useState('');
     const [query, setQuery] = useState('');
     const [weatherData, setWeatherData] = useState('');
@@ -22,6 +23,7 @@ function App() {
         coords,
         currentMessage,
         date,
+        isSubmitting,
         firstRender,
         location,
         query,
@@ -31,6 +33,7 @@ function App() {
         setCurrentMessage,
         setDate,
         setFirstRender,
+        setIsSubmitting,
         setLocation,
         setQuery,
         setRegFormOpen,

@@ -3,11 +3,11 @@ const router = require('express').Router()
 const ctrl = require('../controllers')
 
 // routes
-router.get('/', ctrl.games.index)
-router.get('/:id', ctrl.games.show)
-router.post('/', ctrl.games.create)
-router.put('/:id', ctrl.games.update)
-router.delete('/:id', ctrl.games.destroy)
+router.get('/', ctrl.weatherData.index)
+router.get('/:id', ctrl.weatherData.show)
+router.post('/', ctrl.weatherData.create)
+router.put('/:id', ctrl.weatherData.update)
+router.delete('/:id', ctrl.weatherData.destroy)
 
 // exports
 module.exports = router

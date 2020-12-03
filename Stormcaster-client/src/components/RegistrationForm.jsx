@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
-import { Form, Col, Container } from 'react-bootstrap';
-import { Button } from '@material-ui/core';
+import React, { useContext, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import DatePicker from 'react-datepicker';
 import * as yup from 'yup';
-import { Username, Password, Email } from './subcomponents/form_components';
+import Username from './subcomponents/form_components/Username';
+import Password from './subcomponents/form_components/Password';
+import Email from './subcomponents/form_components/Email'
+
+import { SuperContext } from '../state/SuperContext';
 
 import '../css/registration.css';
 import 'react-datepicker/dist/react-datepicker.css';
-
 
 /* =============================================
 =            Schema            =
@@ -50,11 +52,17 @@ const schema = yup.object().shape({
 ============================================= */
 
 const RegistrationForm = () => {
+    const { isSubmitting } = useContext(SuperContext);
+
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = data => console.log(data);
+    useEffect(() => {
+        if (isSubmitting) {
+            handleSubmit()
+        }
+    }, [isSubmitting])
 
     useEffect(() => {
         console.log(errors);
@@ -63,25 +71,12 @@ const RegistrationForm = () => {
     return (
         <Container id="reg-form">
             <section>
-                <Form id="registration-form" onSubmit={handleSubmit(onSubmit)}>
+                <form id="registration-form">
                     <Username errors={errors} register={register} />
                     <Password errors={errors} register={register} />
                     <Email errors={errors} register={register} />
                     <DatePicker register={register} />
-
-                    <Form.Row id="submit-btn">
-                        <Form.Group id="submit" as={Col}>
-                            <Button
-                                aria-labelledby="submit"
-                                variant="outlined"
-                                color="primary"
-                                name="Submit"
-                                type="submit">
-                                Register
-                            </Button>
-                        </Form.Group>
-                    </Form.Row>
-                </Form>
+                </form>
             </section>
         </Container>
     );

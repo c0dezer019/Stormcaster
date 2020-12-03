@@ -10,4 +10,4 @@ const FormContainer = () => {
     );
 };
 
-export { FormContainer };
+export default FormContainer;

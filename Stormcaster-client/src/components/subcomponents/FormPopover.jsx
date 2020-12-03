@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popover } from 'react-bootstrap';
 
-const popover = (
+const FormPopover = (
 	<Popover id="pass-req">
 		<Popover.Content>
 			<h4>Requirements:</h4>
@@ -21,4 +21,4 @@ const popover = (
 	</Popover>
 );
 
-export { popover };
+export default FormPopover;

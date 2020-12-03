@@ -50,4 +50,4 @@ DatePicker.propTypes = {
     register: PropTypes.func.isRequired,
 };
 
-export { DatePicker };
+export default DatePicker;

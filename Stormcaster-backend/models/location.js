@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      model.location.belongsToMany(model.user, { through: 'userLocations' })
+      models.location.belongsToMany(models.user, { through: 'userLocations' })
     }
   };
   location.init({

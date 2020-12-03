@@ -35,4 +35,4 @@ Username.propTypes = {
     register: PropTypes.func.isRequired,
 };
 
-export { Username };
+export default Username;
