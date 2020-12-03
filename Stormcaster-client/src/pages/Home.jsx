@@ -9,12 +9,12 @@ import {
 } from '@material-ui/core';
 import { SuperContext } from '../state/SuperContext';
 import CurrentForecast from '../components/weather/CurrentForecast';
-import FormContainer from '../containers/FormContainer';
+import RegistrationForm from '../components/RegistrationForm';
 
 let isGeolocationSupported = false;
 
 const Home = () => {
-    const { coords, setCoords, regFormOpen, setIsSubmitting } = useContext(SuperContext);
+    const { coords, setCoords, regFormOpen, setIsSubmitting, setRegFormOpen } = useContext(SuperContext);
 
     const submitAction = () => {
         setIsSubmitting(true);
@@ -55,7 +55,7 @@ const Home = () => {
     };
 
     const handleClose = () => {
-
+        setRegFormOpen(false);
     }
 
     useEffect(() => {
@@ -80,11 +80,11 @@ const Home = () => {
             <Dialog id="reg-form" open={regFormOpen} onClose={handleClose} aria-labelledby="form-title" >
                 <DialogTitle id="form-title">Create an account</DialogTitle>
                 <DialogContent>
-                    <FormContainer />
+                    <RegistrationForm />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="secondary">Cancel</Button>
-                    <Button onClick={submitAction}>Register</Button>
+                    <Button onClick={() => { submitAction() } }>Register</Button>
                 </DialogActions>
             </Dialog>
         </Container>

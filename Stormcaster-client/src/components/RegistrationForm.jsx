@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import DatePicker from 'react-datepicker';
 import * as yup from 'yup';
 import Username from './subcomponents/form_components/Username';
 import Password from './subcomponents/form_components/Password';
-import Email from './subcomponents/form_components/Email'
+import Email from './subcomponents/form_components/Email';
+import Age from './subcomponents/form_components/Age';
+import UserModel from '../models/user';
 
 import { SuperContext } from '../state/SuperContext';
 
@@ -39,7 +41,7 @@ const schema = yup.object().shape({
     email: yup
         .string()
         .matches(
-            /^([a-zA-Z0-9-_.])(@)([a-zA-Z])(.)([a-zA-Z])/i,
+            /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             'Email must be a valid format'
         )
         .email()
@@ -51,18 +53,29 @@ const schema = yup.object().shape({
 =            Form            =
 ============================================= */
 
-const RegistrationForm = () => {
-    const { isSubmitting } = useContext(SuperContext);
+const RegistrationForm = ({ history }) => {
+    // const { isSubmitting, setIsSubmitting } = useContext(SuperContext);
 
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
 
-    useEffect(() => {
-        if (isSubmitting) {
-            handleSubmit()
+    const onSubmit = (data, e) => {
+        e.preventDefault();
+        console.log(data);
+        UserModel.create({
+            username: data.username,
+            password: data.password,
+            email: data.email,
+            age: data.age,
+        })
+    };
+
+  /*   useEffect(() => {
+        if (isSubmitting === true) {
+            handleSubmit(onSubmit);
         }
-    }, [isSubmitting])
+    }, [isSubmitting]); */
 
     useEffect(() => {
         console.log(errors);
@@ -71,12 +84,17 @@ const RegistrationForm = () => {
     return (
         <Container id="reg-form">
             <section>
-                <form id="registration-form">
+                <Form id="registration-form" onSubmit={handleSubmit(onSubmit)}>
                     <Username errors={errors} register={register} />
                     <Password errors={errors} register={register} />
                     <Email errors={errors} register={register} />
-                    <DatePicker register={register} />
-                </form>
+                    <Age errors={errors} register={register} />
+                    <div>
+                        <Button type="submit" variant="primary">
+                            Register
+                        </Button>
+                    </div>
+                </Form>
             </section>
         </Container>
     );

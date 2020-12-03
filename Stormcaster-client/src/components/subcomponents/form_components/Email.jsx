@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Col } from 'react-bootstrap'
-import PropTypes from 'prop-types';
 
 const Email = ({ errors, register }) => {
     return (
@@ -28,11 +27,6 @@ const Email = ({ errors, register }) => {
             </Form.Group>
         </Form.Row>
     );
-};
-
-Email.propTypes = {
-	errors: PropTypes.object.isRequired,
-	register: PropTypes.func.isRequired,
 };
 
 export default Email;

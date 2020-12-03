@@ -47,6 +47,8 @@ const Summary = ({ weatherData, msg, loc }) => {
         return directionalArr[calcDirValue % 16];
     };
 
+    console.log(current)
+
     useEffect(() => {
         tODSwitcher();
     }, [current.dt]);
@@ -73,8 +75,13 @@ const Summary = ({ weatherData, msg, loc }) => {
                     <p id="desc2">
                         <span>
                             {Math.round(current.wind_speed)} MPH&nbsp;
-                            {convertDegrees(current.wind_deg)} with gusts up to{' '}
-                            {Math.round(current.wind_gust)} MPH
+                            {convertDegrees(current.wind_deg)}
+                            {current.wind_gust ? (
+                                <span>
+                                    with gusts up to&nbsp;
+                                    {Math.round(current.wind_gust)} MPH
+                                </span>
+                            ) : null }
                         </span>
                     </p>
                     <p>

@@ -6,7 +6,7 @@ import {
     Button,
     FormControl,
     Menu,
-    MenuItem
+    MenuItem,
 } from '@material-ui/core';
 import { AccountCircleOutlined } from '@material-ui/icons';
 import { SuperContext } from '../state/SuperContext';
@@ -16,14 +16,14 @@ import alertInactive from '../images/alert_inactive.png';
 import '../css/header.css';
 
 const Header = ({ currentUser, logout }) => {
-    const { setQuery, setLocation, setRegFormOpen } = useContext(SuperContext);
+    const { setQuery, setLocation } = useContext(SuperContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const [auth, setAuth] = useState(false);
     const open = Boolean(anchorEl);
 
-    const handleClickOpen = () => {
+    /* const handleClickOpen = () => {
         setRegFormOpen(true);
-    };
+    }; */
 
     const handleMenu = e => {
         setAnchorEl(e.currentTarget);
@@ -132,10 +132,12 @@ const Header = ({ currentUser, logout }) => {
                                     </div>
                                 ) : (
                                     <div>
-                                        <MenuItem id="login">Login</MenuItem>
+                                        <MenuItem href="/login" id="login">
+                                            Login
+                                        </MenuItem>
                                         <MenuItem
-                                            id="register"
-                                            onClick={handleClickOpen}>
+                                            href="/register"
+                                            id="register">
                                             Register
                                         </MenuItem>
                                     </div>
