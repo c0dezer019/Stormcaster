@@ -18,7 +18,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 /* =============================================
 =            Schema            =
 ============================================= */
-
 const schema = yup.object().shape({
     username: yup
         .string()
@@ -67,11 +66,12 @@ const RegistrationForm = ({ history }) => {
             username: data.username,
             password: data.password,
             email: data.email,
-            age: data.age,
-        })
+            age: data.age
+        });
+        history.push('/login');
     };
 
-  /*   useEffect(() => {
+    /*   useEffect(() => {
         if (isSubmitting === true) {
             handleSubmit(onSubmit);
         }

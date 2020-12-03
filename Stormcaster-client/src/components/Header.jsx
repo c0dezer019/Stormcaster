@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 // import { Link } from 'react-router-dom';
 import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import {
@@ -51,8 +52,10 @@ const Header = ({ currentUser, logout }) => {
     return (
         <Navbar expand="lg" id="header" bg="secondary" variant="dark">
             <Container>
-                <Navbar.Brand href="#home" id="brand">
-                    <img id="logo" src={logo} alt="logo" />
+                <Navbar.Brand id="brand">
+                    <Link to="/">
+                        <img id="logo" src={logo} alt="logo" />
+                    </Link>
                 </Navbar.Brand>
 
                 {/* SEARCH */}
@@ -121,23 +124,25 @@ const Header = ({ currentUser, logout }) => {
                                 {auth ? (
                                     <div>
                                         <MenuItem
+                                            component="a"
                                             id="logout"
-                                            href="/logout"
                                             onClick={() => {
                                                 handleMenuClose();
                                                 logout();
-                                            }}>
+                                            }}
+                                            to="/logout">
                                             Logout
                                         </MenuItem>
                                     </div>
                                 ) : (
                                     <div>
-                                        <MenuItem href="/login" id="login">
+                                        <MenuItem component={Link} id="login" to="/login">
                                             Login
                                         </MenuItem>
                                         <MenuItem
-                                            href="/register"
-                                            id="register">
+                                            component={Link}
+                                            id="register"
+                                            to="/register">
                                             Register
                                         </MenuItem>
                                     </div>

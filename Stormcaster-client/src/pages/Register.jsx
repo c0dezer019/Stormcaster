@@ -1,10 +1,10 @@
 import React from 'react'
 import FormContainer from '../containers/FormContainer';
 
-const Register = () => {
+const Register = ({ history }) => {
 
 	return (
-		<FormContainer />
+		<FormContainer history={history} />
 	)
 }
 

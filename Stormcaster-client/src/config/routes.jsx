@@ -11,9 +11,9 @@ const Routes = ({ currentUser, storeUser}) => (
 		<Route exact path="/" component={Home} />
 		<Route path="/profile" component={Profile} />
 		<Route path="/register" component={FormContainer} />
-		<Route path="/login" render={routeProps => {
+		<Route path="/login" render={routeCProps => {
 			return <Login
-						{...routeProps}
+						{...routeCProps}
 						currentUser={currentUser}
 						storeUser={storeUser}
 					/>
