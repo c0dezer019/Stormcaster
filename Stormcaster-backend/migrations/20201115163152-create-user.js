@@ -47,9 +47,6 @@ module.exports = {
       zipcode: {
         type: Sequelize.INTEGER
       },
-      locations: {
-        type: Sequelize.ARRAY(Sequelize.TEXT)
-      },
       settings: {
         type: Sequelize.JSON,
         allowNull: true

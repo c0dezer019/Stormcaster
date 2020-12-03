@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      lid: {
-        type: Sequelize.UUID
-      },
       zipcode: {
         type: Sequelize.INTEGER
       },
@@ -21,7 +18,7 @@ module.exports = {
         type: Sequelize.CHAR
       },
       coords: {
-        type: Sequelize.ARRAY(Sequelize.JSON)
+        type: Sequelize.JSON
       },
       createdAt: {
         allowNull: false,
