@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import {
     TextField,
@@ -17,9 +16,7 @@ import alertInactive from '../images/alert_inactive.png';
 import '../css/header.css';
 
 const Header = ({ logout }) => {
-    const { setQuery, setLocation, currentUser } = useContext(
-        SuperContext
-    );
+    const { setQuery, setLocation, currentUser } = useContext(SuperContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -117,14 +114,23 @@ const Header = ({ logout }) => {
                                 {currentUser ? (
                                     <div>
                                         <MenuItem
+                                            className="header_menu_item"
                                             component={Link}
-                                            id="locales"
+                                            id="profile-link"
+                                            to="/profile">
+                                            Profile
+                                        </MenuItem>
+                                        <MenuItem
+                                            className="header_menu_item"
+                                            component={Link}
+                                            id="locations-link"
                                             to="/locations">
                                             Locations
                                         </MenuItem>
                                         <MenuItem
+                                            className="header_menu_item"
                                             component="a"
-                                            id="logout"
+                                            id="logout-link"
                                             onClick={logout}
                                             to="/logout">
                                             Logout
@@ -133,12 +139,14 @@ const Header = ({ logout }) => {
                                 ) : (
                                     <div>
                                         <MenuItem
+                                            className="header_menu_item"
                                             component={Link}
-                                            id="login"
+                                            id="login-link"
                                             to="/login">
                                             Login
                                         </MenuItem>
                                         <MenuItem
+                                            className="header_menu_item"
                                             component={Link}
                                             id="register"
                                             to="/register">

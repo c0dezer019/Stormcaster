@@ -32,6 +32,17 @@ export default class UserModel {
         }).then(res => res.json());
     }
 
+    static update(data) {
+        return fetch(`${REACT_APP_BACKEND}/user`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+            credentials: 'include'
+        }).then(res => res.json());
+    }
+
     static logout() {
         return backendDELETE({
             url: `/auth/logout`,

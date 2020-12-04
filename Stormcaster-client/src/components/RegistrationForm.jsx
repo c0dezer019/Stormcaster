@@ -53,7 +53,7 @@ const schema = yup.object().shape({
 =            Form            =
 ============================================= */
 
-const RegistrationForm = props => {
+const RegistrationForm = () => {
     const history = useHistory();
     const { currentUser, setCurrentUser } = useContext(SuperContext);
 
@@ -72,6 +72,7 @@ const RegistrationForm = props => {
         });
         setCurrentUser(user)
         localStorage.setItem('id', user.id)
+        localStorage.setItem('username', user.username)
         console.log(localStorage)
         history.push('/');
         console.log(currentUser)
