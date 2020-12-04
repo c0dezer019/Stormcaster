@@ -35,6 +35,7 @@ Introducing Stormcaster, a hyperlocal weather app that displays all the data you
 
 ## Known issues
 - Not very responsive.
+- Login form sends bad data.
 
 ***
 <br />
