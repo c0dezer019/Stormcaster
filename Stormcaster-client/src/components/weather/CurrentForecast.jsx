@@ -1,15 +1,18 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useContext } from 'react';
 import { Container } from '@material-ui/core';
 import Summary from '../subcomponents/weather_components/Summary';
 import '../../css/currentWeather.css';
 
-import { dJAPI, oWAPI, geoAPI } from '../../config/axios';
+import { dJAPI, oWAPI } from '../../config/axios';
 import { SuperContext } from '../../state/SuperContext';
 
 const CurrentForecast = () => {
     const [weatherData, setWeatherData] = useState({});
     const [message, setMessage] = useState('');
-    const { coords, query, setCoords, location, setLocation } = useContext(SuperContext);
+    const { coords, query, setCoords, location, setLocation } = useContext(
+        SuperContext
+    );
 
     const getLocation = async (type, params) => {
         let q;
@@ -20,19 +23,17 @@ const CurrentForecast = () => {
             q = `${params}`;
         }
 
-        const localeData = await geoAPI({
-            url: `/${type}?q=${q}&api_key=${process.env.REACT_APP_GEO_KEY}`,
-        });
+        const localeData = await fetch(
+            `${process.env.REACT_APP_GEO_URL}/${type}?q=${q}&api_key=${process.env.REACT_APP_GEO_KEY}`
+        ).then(res => res.json());
 
-        const { city, state, zip } = localeData.data.results[0].address_components;
+        const { city, state, zip } = localeData.results[0].address_components;
 
         if (location !== '') {
             setCoords(localeData.data.results[0].location);
         } else {
             setLocation(`${city} ${state}, ${zip}`);
         }
-
-        
     };
 
     const fetchData = async () => {
@@ -48,17 +49,18 @@ const CurrentForecast = () => {
     useEffect(async () => {
         if (Object.keys(coords).length !== 0) {
             fetchData();
+            getLocation('reverse', `${coords.lat},${coords.lng}`);
+            console.log(location);
         }
     }, [coords]);
 
     useEffect(() => {
         if (query !== '') {
             getLocation('geocode');
-
         } else if (Object.keys(coords).length !== 0) {
             getLocation(`reverse`, `${coords.lat},${coords.lng}`);
         }
-    }, [query])
+    }, [query]);
 
     useEffect(() => {
         const updateInterval = setInterval(() => {

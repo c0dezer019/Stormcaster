@@ -1,4 +1,5 @@
 /* Registration Form */
+/* Registration Form */
 #current-temp {
   font-size: 2.5em;
 }
@@ -18,6 +19,7 @@
   margin-top: 10%;
 }
 #summary-cntr section {
+  color: black;
   text-align: center;
   width: 100%;
 }
@@ -33,6 +35,10 @@
 }
 #summary-cntr section #summary-text #current-temp span {
   margin: 0;
+}
+
+.wthr-text {
+  color: black;
 }
 
 .wi {

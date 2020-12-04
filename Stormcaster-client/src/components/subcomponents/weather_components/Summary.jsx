@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Container } from '@material-ui/core';
+import { Button } from 'react-bootstrap';
+import { SuperContext } from '../../../state/SuperContext';
+import LocationModel from '../../../models/location';
 
 const Summary = ({ weatherData, msg, loc }) => {
+    const { coords, currentUser } = useContext(SuperContext);
     const [timeOfDay, setTimeOfDay] = useState('day')
 
     if (!weatherData.current) {
@@ -21,6 +25,26 @@ const Summary = ({ weatherData, msg, loc }) => {
             setTimeOfDay('night');
         }
     };
+
+    const saveLocation = async () => {
+        console.log("save")
+        const localeData = await fetch(
+            `${process.env.REACT_APP_GEO_URL}/reverse?q=${coords.lat},${coords.lng}&api_key=${process.env.REACT_APP_GEO_KEY}`
+        ).then(res => res.json());
+
+        const {city, state, zip} = localeData.results[0].address_components
+        const zipcode = zip
+        
+        const data = {city, state, zipcode}
+        console.log(data)
+
+        const located = await LocationModel.create({
+            ...data
+        });
+
+        const user = UserModel.
+
+    }
 
     const convertDegrees = deg => {
         const directionalArr = [
@@ -56,7 +80,7 @@ const Summary = ({ weatherData, msg, loc }) => {
     return (
         <Box id="summary-cntr" display="flex" justifyContent="center">
             <section>
-                <h3>{loc}</h3>
+                <h3>{loc}</h3><span><Button id="save_loc" onClick={() => saveLocation()} variant="link">Save Location</Button></span>
                 <div id="weather-icon">
                     <i className={weatherIcon} id="weather-i"></i>
                 </div>
@@ -67,12 +91,12 @@ const Summary = ({ weatherData, msg, loc }) => {
                             <i className="wi wi-fahrenheit"></i>
                         </span>
                     </div>
-                    <p id="desc1">
+                    <p className="wthr-text" id="desc1">
                         Feels like {Math.round(current.feels_like)}
                         <i className="wi wi-fahrenheit"></i>,&nbsp;
                         {current.weather[0].description}
                     </p>
-                    <p id="desc2">
+                    <p className="wthr-text" id="desc2">
                         <span>
                             {Math.round(current.wind_speed)} MPH&nbsp;
                             {convertDegrees(current.wind_deg)}
@@ -84,12 +108,12 @@ const Summary = ({ weatherData, msg, loc }) => {
                             ) : null }
                         </span>
                     </p>
-                    <p>
+                    <p className="wthr-text">
                         <span>Humidity: {current.humidity}%</span>
                         <span>UV: {current.uvi}</span>
                     </p>
 
-                    <p id="msg">{msg}</p>
+                    <p className="wthr-text" id="msg">{msg}</p>
                 </Container>
             </section>
         </Box>

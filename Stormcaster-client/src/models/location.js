@@ -1,16 +1,29 @@
 import {
-    backendPOST,
     backendGET,
     backendUPDATE,
     backendDELETE,
 } from '../config/axios';
 
+const REACT_APP_BACKEND = 'http://localhost:8000/api/v1'
 export default class LocationModel {
     static create(data) {
-        return backendPOST({
+        /* return backendPOST({
             url: `/weather/location/add`,
             data: JSON.stringify(data),
-        });
+        }); */
+
+        // Add user creds
+        return fetch(`${REACT_APP_BACKEND}/weather/location/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+    }
+
+    static index() {
+        return fetch(`${REACT_APP_BACKEND}/weather/location`).then(res => res.json())
     }
 
     static retrieve(id) {

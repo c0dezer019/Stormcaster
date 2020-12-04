@@ -6,6 +6,7 @@ import Profile from '../pages/Profile';
 import FormContainer from '../containers/FormContainer';
 import Login from '../pages/Login';
 import { SuperContext } from '../state/SuperContext';
+import Locations from '../pages/Locations';
 
 const Routes = ({ storeUser }) => {
     const { currentUser } = useContext(SuperContext);
@@ -15,6 +16,7 @@ const Routes = ({ storeUser }) => {
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
             <Route path="/register" component={FormContainer} />
+            <Route path="/locations" component={Locations} />
             <Route
                 path="/login"
                 render={routeCProps => {
