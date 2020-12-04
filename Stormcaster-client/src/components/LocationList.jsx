@@ -9,7 +9,8 @@ const LocationList = () => {
 
     const fetchLocations = async () => {
         const data = await LocationModel.index();
-        setLocation(data.locations);
+
+        setLocation(data.locations.locations);
     };
 
     useEffect(() => {

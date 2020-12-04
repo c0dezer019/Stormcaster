@@ -21,8 +21,6 @@ export const backendPOST = axios.create({
 	baseURL: `${process.env.REACT_APP_BACKEND}`
 });
 
-backendPOST.defaults.headers.common['Content-Type'] = 'application/json'
-
 export const backendDELETE = axios.create({
 	method: 'delete',
 	baseURL: `${process.env.REACT_APP_BACKEND}`,

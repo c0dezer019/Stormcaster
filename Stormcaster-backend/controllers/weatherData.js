@@ -2,7 +2,13 @@ const db = require('../models');
 
 
 const index = async (req, res) => {
-	const allLocations = await db.location.findAll();
+	console.log(req.query)
+	const allLocations = await db.user.findOne({
+		where: { id: req.query.user},
+		include: [{
+			model: db.location
+		}]
+	});
 
 	if (!allLocations)
 		return res.json({

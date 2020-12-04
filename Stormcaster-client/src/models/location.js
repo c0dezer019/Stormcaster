@@ -19,7 +19,7 @@ export default class LocationModel {
     }
 
     static index() {
-        return fetch(`${REACT_APP_BACKEND}/weather/location`).then(res => res.json())
+        return fetch(`${REACT_APP_BACKEND}/weather/location?user=${localStorage.getItem('id')}`).then(res => res.json())
     }
 
     static retrieve(id) {
