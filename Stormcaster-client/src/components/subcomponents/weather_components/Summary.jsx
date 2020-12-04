@@ -37,21 +37,12 @@ const Summary = ({ weatherData, msg, loc }) => {
         const zipcode = zip;
         const user = localStorage.getItem('id');
 
-        const data = { city, state, zipcode, user };
+        const data = { city, state, zipcode, coords, user };
 
-        const located = await LocationModel.create({
+        await LocationModel.create({
             ...data,
         });
 
-        /* const user = await UserModel.findOne({
-            where: { id: currentUser.id}
-        }) */
-
-        /* try {
-            await currentUser.addLocation(located)
-        } catch(err) {
-            console.log(err)
-        } */
     };
 
     const convertDegrees = deg => {

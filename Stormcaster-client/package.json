@@ -12,6 +12,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "formik": "^2.2.5",
+    "js-cookie": "^2.2.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",

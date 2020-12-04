@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import {
@@ -17,7 +17,9 @@ import alertInactive from '../images/alert_inactive.png';
 import '../css/header.css';
 
 const Header = ({ logout }) => {
-    const { setQuery, setLocation, currentUser } = useContext(SuperContext);
+    const { setQuery, setLocation, currentUser } = useContext(
+        SuperContext
+    );
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -115,6 +117,12 @@ const Header = ({ logout }) => {
                                 {currentUser ? (
                                     <div>
                                         <MenuItem
+                                            component={Link}
+                                            id="locales"
+                                            to="/locations">
+                                            Locations
+                                        </MenuItem>
+                                        <MenuItem
                                             component="a"
                                             id="logout"
                                             onClick={logout}
@@ -124,7 +132,10 @@ const Header = ({ logout }) => {
                                     </div>
                                 ) : (
                                     <div>
-                                        <MenuItem component={Link} id="login" to="/login">
+                                        <MenuItem
+                                            component={Link}
+                                            id="login"
+                                            to="/login">
                                             Login
                                         </MenuItem>
                                         <MenuItem

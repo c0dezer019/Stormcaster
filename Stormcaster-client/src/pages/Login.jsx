@@ -5,8 +5,8 @@ import UserModel from '../models/user';
 
 const Login = ({ storeUser }) => {
     const history = useHistory();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleChange = e => {
         if (e.target.id === 'username') {
@@ -16,22 +16,21 @@ const Login = ({ storeUser }) => {
         }
     };
 
-    const handleSubmit = async e => {
+    const handleSubmit = e => {
         e.preventDefault();
 
-        const creds = { username, password };
-        const user = await UserModel.login(creds);
-
-        try {
-            if (!user) {
-                return false;
-            }
-            storeUser(user.user);
-            console.log(user);
-            history.push('/profile');
-        } catch (err) {
-            console.log(err.message);
-        }
+        // const creds = { username, password };
+        UserModel.login(username, password)
+			.then((data) => {
+				console.log(data);
+				// TODO: FIX IT
+				if (!data.user) {
+					return false;
+				}
+				storeUser(data.user);
+				history.push('/profile');
+			})
+			.catch((err) => console.log(err));
     };
 
     return (

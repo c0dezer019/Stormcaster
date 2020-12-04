@@ -14,7 +14,7 @@ const LocationCard = ({ city, state, zipcode, removeLocation }) => {
                 <span>{zipcode}</span>
             </p>
 		</Link>
-            <Button className="rem-btn" onClick={removeLocation} variant="link">
+            <Button className="rem-btn" onClick={() => removeLocation(city, state, zipcode)} variant="link">
                 Remove
             </Button>
         </div>

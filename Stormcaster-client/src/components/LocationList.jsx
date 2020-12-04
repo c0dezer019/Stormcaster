@@ -25,18 +25,20 @@ const LocationList = props => {
         setLocation(data.locations.locations);
     };
 
-    const removeLocation = () => {
-        // eslint-disable-next-line no-alert
-        alert("Obvious alert")
+    const removeLocation = async (city, state, zip) => {
+        const user = localStorage.getItem('id')
+        const zipcode = zip
+        const data = {user, city, state, zipcode}
+
+        const del = await LocationModel.delete({
+            ...data
+        })
+        history.push('/locations')
     }
 
     useEffect(() => {
         fetchLocations();
     }, []);
-
-    useEffect(() => {
-        console.log(location);
-    }, [location]);
 
     const list = location.map(el => {
         return (

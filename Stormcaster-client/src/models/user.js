@@ -20,8 +20,8 @@ export default class UserModel {
 		}).then((res) => res.json());
 	}
 
-    static login(credentials) {
-        console.log(credentials)
+    static login(user, pass) {
+        const credentials = {user, pass}
         return fetch(`${REACT_APP_BACKEND}/auth/login`, {
             method: 'POST',
             headers: {
