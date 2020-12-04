@@ -98,7 +98,7 @@ const destroy = async (req, res) => {
 		}
 	})
 
-	const assoc = await db.userlocation.destroy({
+	const assoc = await db.userLocations.destroy({
 		where: { 
 			userId: user
 		}
