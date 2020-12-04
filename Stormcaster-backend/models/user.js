@@ -1,11 +1,9 @@
 'use strict';
-// added
-const bcrypt = require('bcrypt')
-
-
 const {
   Model
 } = require('sequelize');
+const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -14,9 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.user.belongsToMany(models.location, { through: "userLocations"})
     }
-     validPassword(passwordTyped) {
+
+    validPassword(passwordTyped) {
       return bcrypt.compareSync(passwordTyped, this.password);
     };
 
@@ -27,49 +26,28 @@ module.exports = (sequelize, DataTypes) => {
       return userData;
     }
   };
-  //changed
-    user.init({
-    email: {
-      type: DataTypes.STRING,
-      validate: {
-        isEmail: {
-          msg: 'Invalid email address'
-        }
-      }
-    },
-    name: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [1, 99],
-          msg: 'Name must be between 1 and 99 characters'
-        }
-      }
-    },
-    password: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [8, 99],
-          msg: 'Password must be between 8 and 99 characters'
-        }
-      }
-    }
+
+  user.init({
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
+    email: DataTypes.TEXT,
+    msgIds: DataTypes.ARRAY(DataTypes.INTEGER),
+    age: DataTypes.INTEGER,
+    zipcode: DataTypes.INTEGER,
+    settings: DataTypes.JSON
   }, {
     sequelize,
     modelName: 'user',
   });
 
-
-
-    user.beforeCreate((pendingUser, options) => {
+  user.beforeCreate((pendingUser, options) => {
     if (pendingUser && pendingUser.password) {
       // hash the password
       let hash = bcrypt.hashSync(pendingUser.password, 12);
       // store the hash as the user's password
       pendingUser.password = hash;
     }
-  })
+  });
 
   return user;
 };

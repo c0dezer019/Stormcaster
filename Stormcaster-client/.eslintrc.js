@@ -10,6 +10,7 @@ module.exports = {
       'prettier/flowtype',
       'prettier/react',
       'prettier/babel',
+      'prettier',
   ],
   parserOptions: {
       ecmaFeatures: { jsx: true },
@@ -38,5 +39,11 @@ module.exports = {
       'import/prefer-default-export': 0,
       'react/forbid-prop-types': 0,
       'no-nested-ternary': 0,
+      'react/prop-types': 0,
+      'array-element-newline': ["error", {
+          "ArrayExpression": "consistent",
+          "ArrayPattern": { "minItems": 20 }
+      }],
+      'no-plusplus': 0
   },
 };
