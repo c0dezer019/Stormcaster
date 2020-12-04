@@ -90,15 +90,21 @@ const Summary = ({ weatherData, msg, loc }) => {
     return (
         <Box id="summary-cntr" display="flex" justifyContent="center">
             <section>
-                <h3>{loc}</h3>
-                <span>
-                    <Button
-                        id="save_loc"
-                        onClick={() => saveLocation()}
-                        variant="link">
-                        Save Location
-                    </Button>
-                </span>
+                <header>
+                    <div>
+                        <span>
+                            <h3>{loc}</h3>
+                        </span>
+                        <span>
+                            <Button
+                                id="save_loc"
+                                onClick={() => saveLocation()}
+                                variant="link">
+                                Save Location
+                            </Button>
+                        </span>
+                    </div>
+                </header>
                 <div id="weather-icon">
                     <i className={weatherIcon} id="weather-i"></i>
                 </div>

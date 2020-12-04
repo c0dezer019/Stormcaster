@@ -1,10 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { Box, withStyles } from '@material-ui/core';
 import LocationModel from '../models/location';
 import LocationCard from './subcomponents/LocationCard';
 
-const LocationList = () => {
+const styles = {
+    root: {
+        marginTop: "10%",
+        '& p': {
+            textAlign: 'center'
+        }
+    },
+};
+
+const LocationList = props => {
+    const { classes } = props
+    const history = useHistory();
     const [location, setLocation] = useState([]);
 
     const fetchLocations = async () => {
@@ -12,6 +24,11 @@ const LocationList = () => {
 
         setLocation(data.locations.locations);
     };
+
+    const removeLocation = () => {
+        // eslint-disable-next-line no-alert
+        alert("Obvious alert")
+    }
 
     useEffect(() => {
         fetchLocations();
@@ -23,22 +40,21 @@ const LocationList = () => {
 
     const list = location.map(el => {
         return (
-            <Link to="/" key={el.id}>
                 <LocationCard
                     city={el.city}
                     state={el.state}
                     zipcode={el.zipcode}
+                    removeLocation={removeLocation}
                 />
-            </Link>
         );
-	});
+    });
 	
 	return (
-		<div>
+		<Box className={classes.root} id="location-list" display="flex" alignItems="center" flexDirection="column" justifyContent="center">
 			<h4>Saved Locations</h4>
 			{location ? list : 'Loading...'}
-		</div>
+		</Box>
 	)
 };
 
-export default LocationList;
+export default withStyles(styles)(LocationList);

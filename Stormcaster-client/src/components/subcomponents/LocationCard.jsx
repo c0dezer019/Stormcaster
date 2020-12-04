@@ -1,13 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
-const LocationCard = ({city, state, zipcode}) => {
-	
+import '../../css/locations.css';
 
-	return (
-		<div>
-			<p><span>{city}</span>&nbsp;<span>{state},</span>&nbsp;<span>{zipcode}</span></p>
-		</div>
-	);
-}
+const LocationCard = ({ city, state, zipcode, removeLocation }) => {
+
+    return (
+        <div className="location-item">
+		<Link to="/">
+            <p className="location-text">
+                <span>{city}</span>&nbsp;<span>{state},</span>&nbsp;
+                <span>{zipcode}</span>
+            </p>
+		</Link>
+            <Button className="rem-btn" onClick={removeLocation} variant="link">
+                Remove
+            </Button>
+        </div>
+    );
+};
 
 export default LocationCard;
