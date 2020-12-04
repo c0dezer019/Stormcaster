@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useContext } from 'react';
 import { Container } from '@material-ui/core';
-import Summary from '../subcomponents/weather_components/Summary';
 import '../../css/currentWeather.css';
+import Summary from '../subcomponents/weather_components/Summary';
 
 import { dJAPI, oWAPI } from '../../config/axios';
 import { SuperContext } from '../../state/SuperContext';
@@ -29,7 +29,8 @@ const CurrentForecast = () => {
 
         const { city, state, zip } = localeData.results[0].address_components;
 
-        if (location !== '') {
+        if (location) {
+            console.log("me!")
             setCoords(localeData.data.results[0].location);
         } else {
             setLocation(`${city} ${state}, ${zip}`);
@@ -47,17 +48,16 @@ const CurrentForecast = () => {
     };
 
     useEffect(async () => {
-        if (Object.keys(coords).length !== 0) {
+        if (Object.keys(coords).length) {
             fetchData();
             getLocation('reverse', `${coords.lat},${coords.lng}`);
-            console.log(location);
         }
     }, [coords]);
 
     useEffect(() => {
-        if (query !== '') {
+        if (query) {
             getLocation('geocode');
-        } else if (Object.keys(coords).length !== 0) {
+        } else if (Object.keys(coords).length) {
             getLocation(`reverse`, `${coords.lat},${coords.lng}`);
         }
     }, [query]);

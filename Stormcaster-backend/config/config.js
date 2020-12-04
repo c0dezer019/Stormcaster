@@ -5,19 +5,21 @@ module.exports = {
     "user": process.env.USER,
     "password": process.env.DB_PASS,
     "database": process.env.DB_DEV,
-    "host": "127.0.0.1",
+    "host": process.env.HOST,
     "dialect": "postgres"
   },
   "test": {
     "user": process.env.USER,
     "password" : process.env.DB_PASS,
     "database": process.env.DB,
-    "host": "127.0.0.1",
+    "host": process.env.HOST,
     "dialect": "postgres"
   },
   "production": {
-    "database": "gamelib",
-    "host": "127.0.0.1",
+    "user": process.env.USER,
+    "password": process.env.DB_PASS,
+    "database": process.env.DB_PROD,
+    "host": process.env.HOST,
     "dialect": "postgres"
   }
 }

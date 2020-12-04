@@ -1,7 +1,7 @@
 const db = require('../models');
 
 
-const index = async ( res) => {
+const index = async (req, res) => {
 	const allLocations = await db.location.findAll();
 
 	if (!allLocations)
@@ -25,12 +25,21 @@ const show = async (req, res) => {
 
 //working
 const create = async (req, res) => {
-    const newLocale = await db.location.create(req.body);
-    
-    const user = db.user.find({
-        where: { username: req.user.username }
-    })
 
+	const newLocale = await db.location.create({
+		city: req.body.city,
+		state: req.body.state,
+		zipcode: req.body.zipcode
+	});
+
+	console.log(req.body)
+	
+	const user = await db.user.findOne({
+		where: { id: req.body.user }
+	});
+
+	await user.addLocation(newLocale);
+	
 	if (res.status === 401)
 		return res.json({
 			message: 'Unable to create new location',

@@ -4,10 +4,11 @@ import { Box, Container } from '@material-ui/core';
 import { Button } from 'react-bootstrap';
 import { SuperContext } from '../../../state/SuperContext';
 import LocationModel from '../../../models/location';
+import UserModel from '../../../models/user';
 
 const Summary = ({ weatherData, msg, loc }) => {
     const { coords, currentUser } = useContext(SuperContext);
-    const [timeOfDay, setTimeOfDay] = useState('day')
+    const [timeOfDay, setTimeOfDay] = useState('day');
 
     if (!weatherData.current) {
         return null;
@@ -27,24 +28,31 @@ const Summary = ({ weatherData, msg, loc }) => {
     };
 
     const saveLocation = async () => {
-        console.log("save")
+        console.log('save');
         const localeData = await fetch(
             `${process.env.REACT_APP_GEO_URL}/reverse?q=${coords.lat},${coords.lng}&api_key=${process.env.REACT_APP_GEO_KEY}`
         ).then(res => res.json());
 
-        const {city, state, zip} = localeData.results[0].address_components
-        const zipcode = zip
-        
-        const data = {city, state, zipcode}
-        console.log(data)
+        const { city, state, zip } = localeData.results[0].address_components;
+        const zipcode = zip;
+        const user = localStorage.getItem('id');
+
+        const data = { city, state, zipcode, user };
 
         const located = await LocationModel.create({
-            ...data
+            ...data,
         });
 
-        const user = UserModel.
+        /* const user = await UserModel.findOne({
+            where: { id: currentUser.id}
+        }) */
 
-    }
+        /* try {
+            await currentUser.addLocation(located)
+        } catch(err) {
+            console.log(err)
+        } */
+    };
 
     const convertDegrees = deg => {
         const directionalArr = [
@@ -71,7 +79,9 @@ const Summary = ({ weatherData, msg, loc }) => {
         return directionalArr[calcDirValue % 16];
     };
 
-    console.log(current)
+    useEffect(() => {
+        console.log(currentUser);
+    }, []);
 
     useEffect(() => {
         tODSwitcher();
@@ -80,7 +90,15 @@ const Summary = ({ weatherData, msg, loc }) => {
     return (
         <Box id="summary-cntr" display="flex" justifyContent="center">
             <section>
-                <h3>{loc}</h3><span><Button id="save_loc" onClick={() => saveLocation()} variant="link">Save Location</Button></span>
+                <h3>{loc}</h3>
+                <span>
+                    <Button
+                        id="save_loc"
+                        onClick={() => saveLocation()}
+                        variant="link">
+                        Save Location
+                    </Button>
+                </span>
                 <div id="weather-icon">
                     <i className={weatherIcon} id="weather-i"></i>
                 </div>
@@ -105,7 +123,7 @@ const Summary = ({ weatherData, msg, loc }) => {
                                     with gusts up to&nbsp;
                                     {Math.round(current.wind_gust)} MPH
                                 </span>
-                            ) : null }
+                            ) : null}
                         </span>
                     </p>
                     <p className="wthr-text">
@@ -113,7 +131,9 @@ const Summary = ({ weatherData, msg, loc }) => {
                         <span>UV: {current.uvi}</span>
                     </p>
 
-                    <p className="wthr-text" id="msg">{msg}</p>
+                    <p className="wthr-text" id="msg">
+                        {msg}
+                    </p>
                 </Container>
             </section>
         </Box>

@@ -35,8 +35,8 @@ module.exports = {
       msgIds: {
         type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
-      birthdate: {
-        type: Sequelize.STRING,
+      age: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
           isDate: true,

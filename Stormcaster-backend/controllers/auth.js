@@ -4,32 +4,33 @@ const bcrypt = require('bcrypt')
 const login = (req, res) => {
   console.log('req.user here >>>>>>>>>>>', req.user)
   console.log('req.session here >>>>>>>>>>>', req.session)
-  res.json({ user: req.user.email })
+  res.json({ user: req.user.username })
 }
 
 const register = (req, res) => {
   // validate the POSTed data - making sure we have a name, an email, a pw
-  const { name, email, password } = req.body
+  const { username, password, email, age } = req.body
   
-  if (!name || !email || !password) {
+  if (!username || !password || !email || !age) {
     return res.json({
-      message: 'Please enter a name, an email, and a password'
+      message: 'Please enter a username, an email, a password, and your age'
     })
   }
 
   // make sure the user doesn't already exist
   db.user.findOne({ 
-    where: { email: email }
+    where: { username: username }
   }).then((foundUser) => {
     if (foundUser) return res.json({
-      message: "A user with that email already exists"
+      message: "That username already exists!"
     })
 
     // if the user doesnt exist, create and save a user to the DB
     db.user.create({
-      name,
+      username,
+      password,
       email,
-      password
+      age
     }).then((newUser)=> {
       res.json(newUser)
     })
