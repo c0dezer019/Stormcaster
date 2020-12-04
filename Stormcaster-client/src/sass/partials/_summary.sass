@@ -1,3 +1,5 @@
+@use 'variables'
+
 #current-temp
 	font-size: 2.5em
 	#fahr
@@ -13,18 +15,31 @@
 	position: relative
 	margin-top: 10%
 	section
+		color: black
+		text-align: center
 		width: 100%
+		header
+			div
+				display: flex
+				justify-content: center
+				margin-left: 4%
+			div :nth-child(2)
+				position: relative
+				bottom: 10%
+		h3
+			width: fit-content
 		#msg
 			width: 50%
 			margin: auto
 		#summary-text
-			text-align: center
 			width: 50%
 			span
 				margin: 5px
 			#current-temp
 				span
 					margin: 0
+.wthr-text
+	color: black
 		
 .wi
 	color: blue

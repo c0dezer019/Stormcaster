@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Col, Container } from 'react-bootstrap';
-import { Button } from '@material-ui/core';
+/* eslint-disable no-unused-vars */
+import React, { useContext, useEffect } from 'react';
+import { Container, Form, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import DatePicker from 'react-datepicker';
 import * as yup from 'yup';
-import { Username, Password, Email } from './subcomponents/form_components';
+import Username from './subcomponents/form_components/Username';
+import Password from './subcomponents/form_components/Password';
+import Email from './subcomponents/form_components/Email';
+import Age from './subcomponents/form_components/Age';
+import UserModel from '../models/user';
+
+import { SuperContext } from '../state/SuperContext';
 
 import '../css/registration.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
+/* =============================================
+=            Schema            =
+============================================= */
 const schema = yup.object().shape({
     username: yup
         .string()
@@ -32,7 +41,7 @@ const schema = yup.object().shape({
     email: yup
         .string()
         .matches(
-            /^([a-zA-Z0-9-_.])(@)([a-zA-Z])(.)([a-zA-Z])/i,
+            /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             'Email must be a valid format'
         )
         .email()
@@ -40,24 +49,39 @@ const schema = yup.object().shape({
     age: yup.number().min(13).required(),
 });
 
-const RegistrationForm = () => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+/* =============================================
+=            Form            =
+============================================= */
+
+const RegistrationForm = props => {
+    const history = useHistory();
+    const { currentUser, setCurrentUser } = useContext(SuperContext);
 
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = data => console.log(data);
-
-    let userAge;
-
-    const calculateAge = () => {
-        const currentDate = new Date();
-        const age = Math.floor(
-            (currentDate - selectedDate) / 1000 / 60 / 60 / 24 / 365
-        );
-        userAge = age;
+    const onSubmit = async (data, e) => {
+        e.preventDefault();
+        console.log(data);
+        const user = await UserModel.create({
+            username: data.username,
+            password: data.password,
+            email: data.email,
+            age: data.age
+        });
+        setCurrentUser(user)
+        localStorage.setItem('id', user.id)
+        console.log(localStorage)
+        history.push('/');
+        console.log(currentUser)
     };
+
+    /*   useEffect(() => {
+        if (isSubmitting === true) {
+            handleSubmit(onSubmit);
+        }
+    }, [isSubmitting]); */
 
     useEffect(() => {
         console.log(errors);
@@ -70,20 +94,12 @@ const RegistrationForm = () => {
                     <Username errors={errors} register={register} />
                     <Password errors={errors} register={register} />
                     <Email errors={errors} register={register} />
-                    <DatePicker register={register} />
-
-                    <Form.Row id="submit-btn">
-                        <Form.Group id="submit" as={Col}>
-                            <Button
-                                aria-labelledby="submit"
-                                variant="outlined"
-                                color="primary"
-                                name="Submit"
-                                type="submit">
-                                Register
-                            </Button>
-                        </Form.Group>
-                    </Form.Row>
+                    <Age errors={errors} register={register} />
+                    <div>
+                        <Button type="submit" variant="primary">
+                            Register
+                        </Button>
+                    </div>
                 </Form>
             </section>
         </Container>

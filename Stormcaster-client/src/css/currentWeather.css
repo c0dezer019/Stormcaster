@@ -1,4 +1,5 @@
 /* Registration Form */
+/* Registration Form */
 #current-temp {
   font-size: 2.5em;
 }
@@ -18,14 +19,27 @@
   margin-top: 10%;
 }
 #summary-cntr section {
+  color: black;
+  text-align: center;
   width: 100%;
+}
+#summary-cntr section header div {
+  display: flex;
+  justify-content: center;
+  margin-left: 4%;
+}
+#summary-cntr section header div :nth-child(2) {
+  position: relative;
+  bottom: 10%;
+}
+#summary-cntr section h3 {
+  width: fit-content;
 }
 #summary-cntr section #msg {
   width: 50%;
   margin: auto;
 }
 #summary-cntr section #summary-text {
-  text-align: center;
   width: 50%;
 }
 #summary-cntr section #summary-text span {
@@ -33,6 +47,10 @@
 }
 #summary-cntr section #summary-text #current-temp span {
   margin: 0;
+}
+
+.wthr-text {
+  color: black;
 }
 
 .wi {

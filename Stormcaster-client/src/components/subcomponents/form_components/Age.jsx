@@ -1,22 +1,22 @@
 import React from 'react';
-
 import { Form, Col } from 'react-bootstrap';
 
-const Username = ({ errors, register }) => {
+const Age = ({ register, errors }) => {
+
     return (
         <Form.Row>
-            <Form.Group as={Col} id="form-username">
-                <Form.Label id="user-label" htmlFor="username">
-                    <span>Username</span>
+            <Form.Group as={Col} id="form-age">
+                <Form.Label id="user-label" htmlFor="age">
+                    <span>Age</span>
                     <Form.Control
-                        aria-placeholder="username"
-                        aria-labelledby="user-label form-username"
+                        aria-placeholder="Age"
+                        aria-labelledby="user-label form-age"
                         aria-required="true"
-                        id="username"
-                        name="username"
-                        placeholder="username"
+                        id="age"
+                        name="age"
+                        placeholder="age"
                         ref={register}
-                        type="text"
+                        type="number"
                     />
                 </Form.Label>
                 {errors.username && <p>This is required.</p>}
@@ -29,4 +29,4 @@ const Username = ({ errors, register }) => {
     );
 };
 
-export default Username;
+export default Age;

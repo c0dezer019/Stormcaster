@@ -1,7 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { TextField, Button, FormControl } from '@material-ui/core';
+import {
+    TextField,
+    Button,
+    FormControl,
+    Menu,
+    MenuItem,
+} from '@material-ui/core';
 import { AccountCircleOutlined } from '@material-ui/icons';
 import { SuperContext } from '../state/SuperContext';
 
@@ -9,10 +16,25 @@ import logo from '../images/stormcaster_logo_light.png';
 import alertInactive from '../images/alert_inactive.png';
 import '../css/header.css';
 
-const Header = () => {
-    const { setQuery, setLocation } = useContext(SuperContext);
-    
-    
+const Header = ({ logout }) => {
+    const { setQuery, setLocation, currentUser } = useContext(
+        SuperContext
+    );
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+
+    /* const handleClickOpen = () => {
+        setRegFormOpen(true);
+    }; */
+
+    const handleMenu = e => {
+        setAnchorEl(e.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
     const handleSubmit = e => {
         e.preventDefault();
         const formattedQuery = e.target.search.value.replace(/\s/g, '+');
@@ -23,8 +45,10 @@ const Header = () => {
     return (
         <Navbar expand="lg" id="header" bg="secondary" variant="dark">
             <Container>
-                <Navbar.Brand href="#home" id="brand">
-                    <img id="logo" src={logo} alt="logo" />
+                <Navbar.Brand id="brand">
+                    <Link to="/">
+                        <img id="logo" src={logo} alt="logo" />
+                    </Link>
                 </Navbar.Brand>
 
                 {/* SEARCH */}
@@ -71,19 +95,58 @@ const Header = () => {
                     </Container>
                     <Container className="profile_item" id="notifications">
                         <img src={alertInactive} alt="No Alerts" />
-                        {/* <>
-                            {notifs.length !== 0 ? (
-                                <>
-                                    <img src={alertActive} alt="Active alert" />
-                                </>
-                            ) : (
-                                <>
-                                    <img src={alertInactive} alt="No Alerts" />
-                                </>
-                            )}
-                        </> */}
                         <Container className="profile_item" id="profile-bubble">
-                            <AccountCircleOutlined id="profile-bubble" />
+                            <AccountCircleOutlined
+                                id="profile-bubble"
+                                onClick={handleMenu}
+                            />
+                            <Menu
+                                id="navbar-menu"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={handleMenuClose}>
+                                {currentUser ? (
+                                    <div>
+                                        <MenuItem
+                                            component={Link}
+                                            id="locales"
+                                            to="/locations">
+                                            Locations
+                                        </MenuItem>
+                                        <MenuItem
+                                            component="a"
+                                            id="logout"
+                                            onClick={logout}
+                                            to="/logout">
+                                            Logout
+                                        </MenuItem>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <MenuItem
+                                            component={Link}
+                                            id="login"
+                                            to="/login">
+                                            Login
+                                        </MenuItem>
+                                        <MenuItem
+                                            component={Link}
+                                            id="register"
+                                            to="/register">
+                                            Register
+                                        </MenuItem>
+                                    </div>
+                                )}
+                            </Menu>
                         </Container>
                     </Container>
                 </Container>

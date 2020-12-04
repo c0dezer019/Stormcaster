@@ -1,4 +1,4 @@
 module.exports = {
-    games: require('./games'),
+    weatherData: require('./weatherData'),
     auth: require('./auth')
 }

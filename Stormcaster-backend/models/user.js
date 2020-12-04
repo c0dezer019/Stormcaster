@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -10,21 +12,42 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.user.belongsToMany(models.location, { through: "userLocations"})
+    }
+
+    validPassword(passwordTyped) {
+      return bcrypt.compareSync(passwordTyped, this.password);
+    };
+
+    // remove the password before serializing
+    toJSON() {
+      let userData = this.get();
+      delete userData.password;
+      return userData;
     }
   };
+
   user.init({
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     email: DataTypes.TEXT,
     msgIds: DataTypes.ARRAY(DataTypes.INTEGER),
-    birthdate: DataTypes.INTEGER,
+    age: DataTypes.INTEGER,
     zipcode: DataTypes.INTEGER,
-    locations: DataTypes.ARRAY(DataTypes.TEXT),
     settings: DataTypes.JSON
   }, {
     sequelize,
     modelName: 'user',
   });
+
+  user.beforeCreate((pendingUser, options) => {
+    if (pendingUser && pendingUser.password) {
+      // hash the password
+      let hash = bcrypt.hashSync(pendingUser.password, 12);
+      // store the hash as the user's password
+      pendingUser.password = hash;
+    }
+  });
+
   return user;
 };
