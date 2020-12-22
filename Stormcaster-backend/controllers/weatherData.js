@@ -109,9 +109,6 @@ const destroy = async (req, res) => {
 	} else {
 		res.status(401);
 	}
-
-	console.log(location, '\n', assoc)
-
 };
 
 module.exports = {

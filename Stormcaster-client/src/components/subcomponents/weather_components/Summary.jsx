@@ -28,7 +28,6 @@ const Summary = ({ weatherData, msg, loc }) => {
     };
 
     const saveLocation = async () => {
-        console.log('save');
         const localeData = await fetch(
             `${process.env.REACT_APP_GEO_URL}/reverse?q=${coords.lat},${coords.lng}&api_key=${process.env.REACT_APP_GEO_KEY}`
         ).then(res => res.json());
