@@ -1,5 +1,6 @@
 {
   "name": "pern-client",
+  "homepage": "https://stormfury.bblankenship.me",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
