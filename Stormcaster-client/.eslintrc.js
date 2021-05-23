@@ -44,6 +44,7 @@ module.exports = {
           "ArrayExpression": "consistent",
           "ArrayPattern": { "minItems": 20 }
       }],
-      'no-plusplus': 0
+      'no-plusplus': 0,
+      'no-param-reassign': 0,
   },
 };
