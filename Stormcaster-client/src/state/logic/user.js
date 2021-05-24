@@ -1,6 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import { createStore, combineReducers } from 'redux';
-import { adjuster } from './counter';
+import { combineReducers } from 'redux';
+
+const newDay = createAction('newDay');
 
 export const userSlice = createSlice({
 	name: 'user',
