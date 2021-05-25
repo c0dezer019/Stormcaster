@@ -1,14 +1,14 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 
-const newDay = createAction('newDay');
+const birthday = createAction('birthday');
 
 export const userSlice = createSlice({
 	name: 'user',
 	initialState: {
 		age: 0,
 		birthdate: '01/01/1970',
-		currentLocation: { lon: 0, lat: 0 },
+		currentLocation: '',
 		loggedIn: false,
 		username: '',
 	},
@@ -20,8 +20,7 @@ export const userSlice = createSlice({
 			state.username = action.payload;
 		},
 		changeLocation: (state, action) => {
-			state.currentLocation.lon = action.payload.lon;
-			state.currentLocation.lat = action.payload.lat;
+			state.currentLocation = action.payload;
 		},
 		setAge: (state, action) => {
 			state.age = action.payload;
@@ -30,7 +29,12 @@ export const userSlice = createSlice({
 			state.birthdate = action.payload;
 		},
 	},
-	extraReducers: {},
+	extraReducers: builder => {
+		// eslint-disable-next-line no-unused-vars
+		builder.addCase(birthday, (state, action) => {
+			state.age += 1;
+		})
+	},
 });
 
 export const { changeLoginStatus, changeUsername, changeLocation, setAge, setBirthdate } = userSlice.actions;
