@@ -1,7 +1,7 @@
 import {
-    backendPOST,
-    backendGET,
     backendDELETE,
+    backendGET,
+    backendPOST,
     backendUPDATE,
 } from '../config/axios';
 

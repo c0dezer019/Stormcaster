@@ -1,166 +1,213 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
-    TextField,
-    Button,
-    FormControl,
+    AppBar,
+    Badge,
+    IconButton,
+    InputBase,
     Menu,
     MenuItem,
+    Toolbar,
 } from '@material-ui/core';
-import { AccountCircleOutlined } from '@material-ui/icons';
-import { SuperContext } from '../state/SuperContext';
+import {
+    AccountCircle,
+    Menu as MenuIcon,
+    MoreVert as MoreIcon,
+    Notifications as NotificationsIcon,
+    Search as SearchIcon,
+} from '@material-ui/icons';
 
+import headerStyles from '../muiStyles/headerStyles';
 import logo from '../images/stormcaster_logo_light.png';
-import alertInactive from '../images/alert_inactive.png';
-import '../css/header.css';
+import logoDark from '../images/stormcaster_logo_color.png';
 
-const Header = ({ logout }) => {
-    const { setQuery, setLocation, currentUser } = useContext(SuperContext);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+const Header = ({ user, mode }) => {
+    const [anchorEl, setAnchorEl] = useState({});
+    const [logoStyle, setLogoStyle] = useState(logo);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState({});
+    const [notifications] = useState([]);
 
-    /* const handleClickOpen = () => {
-        setRegFormOpen(true);
-    }; */
+    const headerClasses = headerStyles();
+    const profileMenuId = 'account-menu';
+    const profileMobileMenuId = 'mobile-account-menu';
+    const isMenuOpen = Boolean(Object.keys(anchorEl).length > 0);
+    const isMobileMenuOpen = Boolean(
+        Object.keys(mobileMoreAnchorEl).length > 0
+    );
 
-    const handleMenu = e => {
+    const handleAccountMenuOpen = e => {
         setAnchorEl(e.currentTarget);
+        console.log(anchorEl);
     };
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
+    const handleMobileAccountMenuOpen = e => {
+        setMobileMoreAnchorEl(e.currentTarget);
     };
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        const formattedQuery = e.target.search.value.replace(/\s/g, '+');
-        setQuery(formattedQuery);
-        setLocation(e.target.search.value);
+    const handleAccountMenuClose = () => {
+        setAnchorEl({});
     };
+
+    const handleMobileAccountMenuClose = () => {
+        setMobileMoreAnchorEl({});
+    };
+
+    const accountMenu = (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id="account-menu"
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen}
+            onClose={handleAccountMenuClose}>
+            {Object.keys(user).length > 0 ? (
+                <>
+                    <MenuItem onClick={handleAccountMenuClose}>
+                        Profile
+                    </MenuItem>
+                    <MenuItem onClick={handleAccountMenuClose}>
+                        Preferences
+                    </MenuItem>
+                </>
+            ) : (
+                <>
+                    <MenuItem>Login</MenuItem>
+                    <MenuItem>Register</MenuItem>
+                </>
+            )}
+        </Menu>
+    );
+
+    const mobileAccountMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id="mobile-account-menu"
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileAccountMenuClose}>
+            <MenuItem>
+                <IconButton
+                    aria-label={`show ${notifications.length} new notifications`}
+                    color="inherit">
+                    <Badge
+                        badgeContent={notifications.length}
+                        color="secondary">
+                        <NotificationsIcon />
+                    </Badge>
+                </IconButton>
+                <p>Notifications</p>
+            </MenuItem>
+            <MenuItem onclick={handleMobileAccountMenuOpen}>
+                <IconButton
+                    aria-controls={profileMobileMenuId}
+                    aria-haspopup="true"
+                    aria-label={
+                        user !== '' ? `account of ${user}` : 'no user logged in'
+                    }
+                    color="inherit">
+                    <AccountCircle />
+                </IconButton>
+                <p>Profile</p>
+            </MenuItem>
+        </Menu>
+    );
+
+    useEffect(() => {
+        if (mode === 'dark') setLogoStyle(logoDark);
+    });
+
+    useEffect(() => {
+        if (mode === 'light') setLogoStyle(logo);
+        else setLogoStyle(logoDark);
+    }, [mode]);
 
     return (
-        <Navbar expand="lg" id="header" bg="secondary" variant="dark">
-            <Container>
-                <Navbar.Brand id="brand">
-                    <Link to="/">
-                        <img id="logo" src={logo} alt="logo" />
-                    </Link>
-                </Navbar.Brand>
-
-                {/* SEARCH */}
-                <form onSubmit={handleSubmit}>
-                    <FormControl variant="outlined">
-                        <>
-                            {['left'].map(placement => (
-                                <OverlayTrigger
-                                    key={placement}
-                                    placement={placement}
-                                    delay={{ show: 250, hide: 400 }}
-                                    overlay={
-                                        <Tooltip id={`tooltip-${placement}`}>
-                                            Zipcode, city/state, coords, or
-                                            address
-                                        </Tooltip>
-                                    }>
-                                    <TextField
-                                        id="search"
-                                        size="small"
-                                        type="text"
-                                        placeholder="Location"
-                                        name="search"
-                                        variant="outlined"
-                                    />
-                                </OverlayTrigger>
-                            ))}
-                        </>
-                    </FormControl>
-
-                    <Button type="submit" variant="text">
-                        <span id="q">Search</span>
-                    </Button>
-                </form>
-
-                {/* NOTIFICATIONS/PROFILE */}
-                <Container id="profile-section">
-                    <Container className="profile_item" id="advisories">
-                        {/*  {advisories.length !== 0 ? (
-                            <adv>
-                                <img src={hazard} alt="Active Advisory" />
-                            </adv>
-                        ) : null} */}
-                    </Container>
-                    <Container className="profile_item" id="notifications">
-                        <img src={alertInactive} alt="No Alerts" />
-                        <Container className="profile_item" id="profile-bubble">
-                            <AccountCircleOutlined
-                                id="profile-bubble"
-                                onClick={handleMenu}
+        <div>
+            <AppBar className={headerClasses.appBar} position="static">
+                <Toolbar>
+                    <div className={headerClasses.sectionMobile}>
+                        <IconButton
+                            aria-label="open drawer"
+                            className={headerClasses.menuButton}
+                            color="inherit"
+                            edge="start">
+                            <MenuIcon />
+                        </IconButton>
+                    </div>
+                    <img
+                        className={headerClasses.logo}
+                        src={logoStyle}
+                        alt="Logo"
+                    />
+                    {/* Add search style */}
+                    <div className={headerClasses.grow} />
+                    <div className={headerClasses.search}>
+                        {/* Add searchIcon style */}
+                        <div className={headerClasses.searchIcon}>
+                            <SearchIcon />
+                        </div>
+                        {/* Add mobile styles */}
+                        <div>
+                            <InputBase
+                                classes={{
+                                    root: headerClasses.inputRoot,
+                                    input: headerClasses.inputInput,
+                                }}
+                                inputProps={{ 'aria-label': 'search' }}
+                                placeholder="Search"
                             />
-                            <Menu
-                                id="navbar-menu"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={open}
-                                onClose={handleMenuClose}>
-                                {currentUser ? (
-                                    <div>
-                                        <MenuItem
-                                            className="header_menu_item"
-                                            component={Link}
-                                            id="profile-link"
-                                            to="/profile">
-                                            Profile
-                                        </MenuItem>
-                                        <MenuItem
-                                            className="header_menu_item"
-                                            component={Link}
-                                            id="locations-link"
-                                            to="/locations">
-                                            Locations
-                                        </MenuItem>
-                                        <MenuItem
-                                            className="header_menu_item"
-                                            component="a"
-                                            id="logout-link"
-                                            onClick={logout}
-                                            to="/logout">
-                                            Logout
-                                        </MenuItem>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <MenuItem
-                                            className="header_menu_item"
-                                            component={Link}
-                                            id="login-link"
-                                            to="/login">
-                                            Login
-                                        </MenuItem>
-                                        <MenuItem
-                                            className="header_menu_item"
-                                            component={Link}
-                                            id="register"
-                                            to="/register">
-                                            Register
-                                        </MenuItem>
-                                    </div>
-                                )}
-                            </Menu>
-                        </Container>
-                    </Container>
-                </Container>
-            </Container>
-        </Navbar>
+                        </div>
+                    </div>
+                    <div className={headerClasses.sectionDesktop}>
+                        <IconButton
+                            aria-label={`show ${notifications.length} new notifications`}
+                            color="inherit">
+                            <Badge
+                                badgeContent={notifications.length}
+                                color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            aria-controls={profileMenuId}
+                            aria-haspopup="true"
+                            aria-label="account of current user"
+                            color="inherit"
+                            edge="end"
+                            id={profileMenuId}
+                            onClick={handleAccountMenuOpen}>
+                            <AccountCircle />
+                        </IconButton>
+                    </div>
+                    <div className={headerClasses.sectionMobile}>
+                        <IconButton
+                            aria-controls={profileMobileMenuId}
+                            aria-haspopup="true"
+                            aria-label="show more"
+                            color="inherit"
+                            id={profileMobileMenuId}
+                            onClick={handleMobileAccountMenuOpen}>
+                            <MoreIcon />
+                        </IconButton>
+                    </div>
+                </Toolbar>
+            </AppBar>
+            {accountMenu}
+            {mobileAccountMenu}
+        </div>
     );
+};
+
+Header.propTypes = {
+    user: PropTypes.shape.isRequired,
+    mode: PropTypes.string,
+};
+
+Header.defaultProps = {
+    mode: 'light',
 };
 
 export default Header;

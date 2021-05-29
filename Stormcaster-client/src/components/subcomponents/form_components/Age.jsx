@@ -1,8 +1,7 @@
 import React from 'react';
-import { Form, Col } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 
 const Age = ({ register, errors }) => {
-
     return (
         <Form.Row>
             <Form.Group as={Col} id="form-age">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form, Col } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 
 const Username = ({ errors, register }) => {
     return (

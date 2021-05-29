@@ -1,17 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from 'react';
-import {
-    Box,
-    Button,
-    TextField,
-    InputLabel,
-    FormControl,
-} from '@material-ui/core';
-import UserModel from '../models/user';
-import { SuperContext } from '../state/SuperContext';
+import React, { useContext, useState } from "react";
+import { Box, Button, FormControl, InputLabel, TextField } from "@material-ui/core";
+import UserModel from "../models/user";
+import { SuperContext } from "../state/SuperContext";
 
 const Profile = () => {
-	const { currentUser } = useContext(SuperContext);
+    const { currentUser } = useContext(SuperContext);
     const [zipcode, setZipcode] = useState('');
     const user = localStorage.getItem('username');
 
@@ -21,8 +15,8 @@ const Profile = () => {
     };
 
     const onSet = async () => {
-		const data = { currentUser, zipcode }
-		const zip = await UserModel.update({ ...data });
+        const data = { currentUser, zipcode };
+        const zip = await UserModel.update({ ...data });
     };
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const SuperContext = createContext({
     coords: {},
@@ -21,10 +21,10 @@ export const SuperContext = createContext({
     setQuery: () => {},
     setRegFormOpen: () => {},
     setWeatherData: () => {},
-})
+});
 
 export const SuperProvider = ({ children }) => {
-	const [coords, setCoords] = useState({});
+    const [coords, setCoords] = useState({});
     const [currentMessage, setCurrentMessage] = useState('');
     const [currentUser, setCurrentUser] = useState(localStorage.getItem('id'));
     const [date, setDate] = useState(new Date());
@@ -33,9 +33,9 @@ export const SuperProvider = ({ children }) => {
     const [location, setLocation] = useState('');
     const [query, setQuery] = useState('');
     const [weatherData, setWeatherData] = useState('');
-	const [regFormOpen, setRegFormOpen] = useState(false);
+    const [regFormOpen, setRegFormOpen] = useState(false);
 
-	const value = {
+    const value = {
         coords,
         currentMessage,
         currentUser,
@@ -57,10 +57,8 @@ export const SuperProvider = ({ children }) => {
         setRegFormOpen,
         setWeatherData,
     };
-	
-	return (
-		<SuperContext.Provider value={value}>
-			{children}
-		</SuperContext.Provider>
-	)
+
+    return (
+        <SuperContext.Provider value={value}>{children}</SuperContext.Provider>
+    );
 };

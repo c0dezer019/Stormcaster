@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Routes from './config/routes';
-import UserModel from './models/user';
-import { SuperContext } from './state/SuperContext';
+import React, { useContext } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Routes from "./config/routes";
+import UserModel from "./models/user";
+import { SuperContext } from "./state/SuperContext";
 
-import './css/weather-icons.min.css';
-import './css/weather-icons-wind.min.css';
+import "./css/weather-icons.min.css";
+import "./css/weather-icons-wind.min.css";
 
 function App() {
     const { setCurrentUser } = useContext(SuperContext);

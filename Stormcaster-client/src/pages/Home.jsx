@@ -5,7 +5,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle
+    DialogTitle,
 } from '@material-ui/core';
 import { SuperContext } from '../state/SuperContext';
 import CurrentForecast from '../components/weather/CurrentForecast';
@@ -14,11 +14,12 @@ import RegistrationForm from '../components/RegistrationForm';
 let isGeolocationSupported = false;
 
 const Home = () => {
-    const { coords, setCoords, regFormOpen, setIsSubmitting, setRegFormOpen } = useContext(SuperContext);
+    const { coords, setCoords, regFormOpen, setIsSubmitting, setRegFormOpen } =
+        useContext(SuperContext);
 
     const submitAction = () => {
         setIsSubmitting(true);
-    }
+    };
 
     const toggle = state => {
         isGeolocationSupported = state;
@@ -56,7 +57,7 @@ const Home = () => {
 
     const handleClose = () => {
         setRegFormOpen(false);
-    }
+    };
 
     useEffect(() => {
         if (Object.keys(coords).length === 0) {
@@ -77,14 +78,25 @@ const Home = () => {
                 </>
             )}
             <CurrentForecast />
-            <Dialog id="reg-form" open={regFormOpen} onClose={handleClose} aria-labelledby="form-title" >
+            <Dialog
+                id="reg-form"
+                open={regFormOpen}
+                onClose={handleClose}
+                aria-labelledby="form-title">
                 <DialogTitle id="form-title">Create an account</DialogTitle>
                 <DialogContent>
                     <RegistrationForm />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="secondary">Cancel</Button>
-                    <Button onClick={() => { submitAction() } }>Register</Button>
+                    <Button onClick={handleClose} color="secondary">
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            submitAction();
+                        }}>
+                        Register
+                    </Button>
                 </DialogActions>
             </Dialog>
         </Container>

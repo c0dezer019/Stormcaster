@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React from "react";
 
-import { Form, Col } from 'react-bootstrap';
+import { Col, Form } from "react-bootstrap";
 
 const Password = ({ register, errors }) => {
     return (

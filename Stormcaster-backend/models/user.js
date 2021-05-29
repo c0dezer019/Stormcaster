@@ -1,8 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-const bcrypt = require('bcrypt');
+"use strict";
+const { Model } = require("sequelize");
+const bcrypt = require("bcrypt");
 
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
@@ -12,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.user.belongsToMany(models.location, { through: "userLocations"})
+      models.user.belongsToMany(models.location, { through: "userLocations" });
     }
 
     validPassword(passwordTyped) {
       return bcrypt.compareSync(passwordTyped, this.password);
-    };
+    }
 
     // remove the password before serializing
     toJSON() {
@@ -25,20 +23,23 @@ module.exports = (sequelize, DataTypes) => {
       delete userData.password;
       return userData;
     }
-  };
+  }
 
-  user.init({
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.TEXT,
-    msgIds: DataTypes.ARRAY(DataTypes.INTEGER),
-    age: DataTypes.INTEGER,
-    zipcode: DataTypes.INTEGER,
-    settings: DataTypes.JSON
-  }, {
-    sequelize,
-    modelName: 'user',
-  });
+  user.init(
+    {
+      username: DataTypes.STRING,
+      password: DataTypes.STRING,
+      email: DataTypes.TEXT,
+      msgIds: DataTypes.ARRAY(DataTypes.INTEGER),
+      age: DataTypes.INTEGER,
+      zipcode: DataTypes.INTEGER,
+      settings: DataTypes.JSON,
+    },
+    {
+      sequelize,
+      modelName: "user",
+    }
+  );
 
   user.beforeCreate((pendingUser, options) => {
     if (pendingUser && pendingUser.password) {

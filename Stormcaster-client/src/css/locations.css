@@ -1,17 +1,19 @@
 /* Registration Form */
 /* Registration Form */
 .location-item {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  width: auto;
-  height: 10%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+    height: 10%;
 }
+
 .location-item a {
-  margin: auto;
+    margin: auto;
 }
+
 .location-item p {
-  margin: 0;
+    margin: 0;
 }
 
 /*# sourceMappingURL=locations.css.map */

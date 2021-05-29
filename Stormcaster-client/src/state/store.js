@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import temperatureReducer from "./logic/location";
+import { configureStore } from '@reduxjs/toolkit';
+import temperatureReducer from './logic/location';
 
 export default configureStore({
-	reducer: {
-		temperature: temperatureReducer
-	}
-})
+    reducer: {
+        temperature: temperatureReducer,
+    },
+});

@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable("users", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       username: {
         type: Sequelize.STRING(36),
@@ -17,11 +17,11 @@ module.exports = {
           isAlphanumeric: true,
           max: 36,
           min: 5,
-        }
+        },
       },
       password: {
         type: Sequelize.STRING(99),
-        allowNull: false
+        allowNull: false,
       },
       email: {
         type: Sequelize.TEXT,
@@ -29,11 +29,11 @@ module.exports = {
         validate: {
           isEmail: true,
           notEmpty: true,
-          notNull: true
-        }
+          notNull: true,
+        },
       },
       msgIds: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER)
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
       },
       age: {
         type: Sequelize.INTEGER,
@@ -41,27 +41,27 @@ module.exports = {
         validate: {
           isDate: true,
           notEmpty: true,
-          notNull: true
-        }
+          notNull: true,
+        },
       },
       zipcode: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       settings: {
         type: Sequelize.JSON,
-        allowNull: true
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
-  }
+    await queryInterface.dropTable("users");
+  },
 };

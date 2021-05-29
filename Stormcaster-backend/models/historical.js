@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class historical extends Model {
     /**
@@ -12,14 +10,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  historical.init({
-    lid: DataTypes.UUID,
-    locales: DataTypes.ARRAY(DataTypes.JSON),
-    weatherDATA: DataTypes.ARRAY(DataTypes.JSON)
-  }, {
-    sequelize,
-    modelName: 'historical',
-  });
+  }
+  historical.init(
+    {
+      lid: DataTypes.UUID,
+      locales: DataTypes.ARRAY(DataTypes.JSON),
+      weatherDATA: DataTypes.ARRAY(DataTypes.JSON),
+    },
+    {
+      sequelize,
+      modelName: "historical",
+    }
+  );
   return historical;
 };

@@ -1,5 +1,5 @@
-import { useContext, useEffect } from 'react';
-import { SuperContext } from '../state/SuperContext';
+import { useContext, useEffect } from "react";
+import { SuperContext } from "../state/SuperContext";
 
 // Doesn't return anything, this simply converts the entered query into acceptable parameters for OWM.
 const LocaleConversion = () => {
@@ -9,20 +9,20 @@ const LocaleConversion = () => {
         const fetchCoords = await fetch(
             `${process.env.REACT_APP_GEO_URL}/geocode?q=${q}&api_key=${process.env.REACT_APP_GEO_KEY}`
         ).then(res => res.json());
-        
-        return fetchCoords.results[0].location
+
+        return fetchCoords.results[0].location;
     };
 
-        useEffect(async () => {
-            if (query !== '') {
-                const coord = await convertToCoords(query);
-                setCoords(coord);
-                // Setting query back to default to prevent an infinite loop.
-                setQuery('');
-            }
-        }, [query]);
+    useEffect(async () => {
+        if (query !== '') {
+            const coord = await convertToCoords(query);
+            setCoords(coord);
+            // Setting query back to default to prevent an infinite loop.
+            setQuery('');
+        }
+    }, [query]);
 
-    return (null);
+    return null;
 };
 
 export default LocaleConversion;

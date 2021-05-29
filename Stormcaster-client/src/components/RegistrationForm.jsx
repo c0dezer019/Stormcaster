@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import Username from './subcomponents/form_components/Username';
-import Password from './subcomponents/form_components/Password';
-import Email from './subcomponents/form_components/Email';
-import Age from './subcomponents/form_components/Age';
-import UserModel from '../models/user';
+import React, { useContext, useEffect } from "react";
+import { Button, Container, Form } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import Username from "./subcomponents/form_components/Username";
+import Password from "./subcomponents/form_components/Password";
+import Email from "./subcomponents/form_components/Email";
+import Age from "./subcomponents/form_components/Age";
+import UserModel from "../models/user";
 
-import { SuperContext } from '../state/SuperContext';
+import { SuperContext } from "../state/SuperContext";
 
-import '../css/registration.css';
-import 'react-datepicker/dist/react-datepicker.css';
+import "../css/registration.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 /* =============================================
 =            Schema            =
@@ -68,21 +68,21 @@ const RegistrationForm = () => {
             username: data.username,
             password: data.password,
             email: data.email,
-            age: data.age
+            age: data.age,
         });
-        setCurrentUser(user)
-        localStorage.setItem('id', user.id)
-        localStorage.setItem('username', user.username)
-        console.log(localStorage)
+        setCurrentUser(user);
+        localStorage.setItem('id', user.id);
+        localStorage.setItem('username', user.username);
+        console.log(localStorage);
         history.push('/');
-        console.log(currentUser)
+        console.log(currentUser);
     };
 
     /*   useEffect(() => {
-        if (isSubmitting === true) {
-            handleSubmit(onSubmit);
-        }
-    }, [isSubmitting]); */
+      if (isSubmitting === true) {
+          handleSubmit(onSubmit);
+      }
+  }, [isSubmitting]); */
 
     useEffect(() => {
         console.log(errors);

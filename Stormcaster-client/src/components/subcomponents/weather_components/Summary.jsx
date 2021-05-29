@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect, useState } from 'react';
-import { Box, Container } from '@material-ui/core';
-import { Button } from 'react-bootstrap';
-import { SuperContext } from '../../../state/SuperContext';
-import LocationModel from '../../../models/location';
-import UserModel from '../../../models/user';
+import React, { useContext, useEffect, useState } from "react";
+import { Box, Container } from "@material-ui/core";
+import { Button } from "react-bootstrap";
+import { SuperContext } from "../../../state/SuperContext";
+import LocationModel from "../../../models/location";
 
 const Summary = ({ weatherData, msg, loc }) => {
     const { coords, currentUser } = useContext(SuperContext);
@@ -42,7 +41,6 @@ const Summary = ({ weatherData, msg, loc }) => {
         await LocationModel.create({
             ...data,
         });
-
     };
 
     const convertDegrees = deg => {

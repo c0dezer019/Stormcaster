@@ -1,12 +1,12 @@
 /* eslint-disable consistent-return */
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import UserModel from '../models/user';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import UserModel from "../models/user";
 
 const Login = ({ storeUser }) => {
     const history = useHistory();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleChange = e => {
         if (e.target.id === 'username') {
@@ -21,16 +21,16 @@ const Login = ({ storeUser }) => {
 
         // const creds = { username, password };
         UserModel.login(username, password)
-			.then((data) => {
-				console.log(data);
-				// TODO: FIX IT
-				if (!data.user) {
-					return false;
-				}
-				storeUser(data.user);
-				history.push('/profile');
-			})
-			.catch((err) => console.log(err));
+            .then(data => {
+                console.log(data);
+                // TODO: FIX IT
+                if (!data.user) {
+                    return false;
+                }
+                storeUser(data.user);
+                history.push('/profile');
+            })
+            .catch(err => console.log(err));
     };
 
     return (

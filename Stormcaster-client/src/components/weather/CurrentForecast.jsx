@@ -1,18 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useContext } from 'react';
-import { Container } from '@material-ui/core';
-import '../../css/currentWeather.css';
-import Summary from '../subcomponents/weather_components/Summary';
+import React, { useContext, useEffect, useState } from "react";
+import { Container } from "@material-ui/core";
+import "../../css/currentWeather.css";
+import Summary from "../subcomponents/weather_components/Summary";
 
-import { dJAPI, oWAPI } from '../../config/axios';
-import { SuperContext } from '../../state/SuperContext';
+import { dJAPI, oWAPI } from "../../config/axios";
+import { SuperContext } from "../../state/SuperContext";
 
 const CurrentForecast = () => {
     const [weatherData, setWeatherData] = useState({});
     const [message, setMessage] = useState('');
-    const { coords, query, setCoords, location, setLocation } = useContext(
-        SuperContext
-    );
+    const { coords, query, setCoords, location, setLocation } =
+        useContext(SuperContext);
 
     const getLocation = async (type, params) => {
         let q;
@@ -30,7 +29,7 @@ const CurrentForecast = () => {
         const { city, state, zip } = localeData.results[0].address_components;
 
         if (location) {
-            console.log("me!")
+            console.log('me!');
             setCoords(localeData.data.results[0].location);
         } else {
             setLocation(`${city} ${state}, ${zip}`);

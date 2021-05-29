@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Col } from 'react-bootstrap'
+import { Col, Form } from 'react-bootstrap';
 
 const Email = ({ errors, register }) => {
     return (
@@ -18,9 +18,7 @@ const Email = ({ errors, register }) => {
                         type="email"
                     />
                 </Form.Label>
-				<Form.Text
-                    id="email-helper"
-                    aria-labelledby="email form-email">
+                <Form.Text id="email-helper" aria-labelledby="email form-email">
                     <p>{errors.email?.message}</p>
                 </Form.Text>
                 {errors.email && <p>This is required.</p>}

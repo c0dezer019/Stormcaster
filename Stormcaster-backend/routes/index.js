@@ -1,4 +1,4 @@
 module.exports = {
-    weatherData: require('./weatherData'),
-    auth: require('./auth'),
-}
+  weatherData: require("./weatherData"),
+  auth: require("./auth"),
+};

@@ -1,4 +1,4 @@
-import {backendUPDATE } from '../config/axios';
+import { backendUPDATE } from '../config/axios';
 
 const REACT_APP_BACKEND = 'http://localhost:8000/api/v1';
 export default class LocationModel {
@@ -23,7 +23,7 @@ export default class LocationModel {
     }
 
     static retrieve(data) {
-        const { user, zipcode } = data
+        const { user, zipcode } = data;
 
         return fetch(
             `${REACT_APP_BACKEND}/weather/location/get?location=${zipcode}&user=${user}`
@@ -39,9 +39,12 @@ export default class LocationModel {
 
     static delete(data) {
         const { city, state, zipcode, user } = data;
-        return fetch(`${REACT_APP_BACKEND}/weather/location/delete?user=${user}&city=${city}&state=${state}&zipcode=${zipcode}`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json'}
-        }).then(res => res.json());
+        return fetch(
+            `${REACT_APP_BACKEND}/weather/location/delete?user=${user}&city=${city}&state=${state}&zipcode=${zipcode}`,
+            {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        ).then(res => res.json());
     }
 }
