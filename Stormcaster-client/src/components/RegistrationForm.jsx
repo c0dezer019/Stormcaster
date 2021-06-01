@@ -1,20 +1,16 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import Username from "./subcomponents/form_components/Username";
-import Password from "./subcomponents/form_components/Password";
-import Email from "./subcomponents/form_components/Email";
-import Age from "./subcomponents/form_components/Age";
-import UserModel from "../models/user";
+import React, { useContext, useEffect } from 'react';
+import { FormControl, Grid, TextField } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import UserModel from '../models/user';
 
-import { SuperContext } from "../state/SuperContext";
+import { SuperContext } from '../state/SuperContext';
 
-import "../css/registration.css";
-import "react-datepicker/dist/react-datepicker.css";
+import '../css/registration.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 /* =============================================
 =            Schema            =
@@ -89,21 +85,21 @@ const RegistrationForm = () => {
     }, [errors]);
 
     return (
-        <Container id="reg-form">
-            <section>
-                <Form id="registration-form" onSubmit={handleSubmit(onSubmit)}>
-                    <Username errors={errors} register={register} />
-                    <Password errors={errors} register={register} />
-                    <Email errors={errors} register={register} />
-                    <Age errors={errors} register={register} />
-                    <div>
-                        <Button type="submit" variant="primary">
-                            Register
-                        </Button>
-                    </div>
-                </Form>
-            </section>
-        </Container>
+        <Grid container id="reg-form">
+            <Grid item xs={12}>
+                <FormControl required>
+                    <TextField id="username" name="username" type="text" label="Username" variant="outlined" required />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <TextField id="email" name="email" type="email" label="email" variant="outlined" required />
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl required>
+                    <TextField id="password" name="password" type="password" label="Password" variant="outlined" required />
+                </FormControl>
+            </Grid>
+        </Grid>
     );
 };
 

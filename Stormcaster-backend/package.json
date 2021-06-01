@@ -12,19 +12,18 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.0",
-    "bcrypt": "^5.0.0",
+    "connect-mongo": "^4.4.1",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
     "express-session": "^1.17.1",
     "graphql": "^15.5.0",
+    "jwks-rsa": "^2.0.3",
     "moment": "^2.29.1",
-    "mongoose": "^5.10.17",
+    "mongoose": "^5.12.12",
     "morgan": "^1.10.0",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0",
-    "pg": "^8.5.1",
-    "sequelize": "^6.3.5",
+    "request": "^2.88.2",
     "webpack": "^5.38.1"
   }
 }

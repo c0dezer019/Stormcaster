@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Col, Form } from 'react-bootstrap';
-
 const Username = ({ errors, register }) => {
     return (
         <Form.Row>

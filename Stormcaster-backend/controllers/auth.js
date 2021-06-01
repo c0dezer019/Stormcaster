@@ -1,5 +1,4 @@
 const db = require("../models");
-const bcrypt = require("bcrypt");
 
 const login = (req, res) => {
   console.log("req.user here >>>>>>>>>>>", req.username);
@@ -52,11 +51,13 @@ const logout = (req, res) => {
 };
 
 // This is a utility function for developer use only
-const verify = (req, res) => {};
+const authorized = (req, res) => {
+  res.send('Secured Resource');
+};
 
 module.exports = {
   login,
   register,
   logout,
-  verify,
+  authorized,
 };
