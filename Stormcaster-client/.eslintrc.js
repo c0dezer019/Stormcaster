@@ -44,4 +44,11 @@ module.exports = {
         'no-plusplus': 0,
         'no-param-reassign': 0,
     },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["src"],
+            },
+        },
+    },
 };
