@@ -7,7 +7,7 @@ const LocaleConversion = () => {
 
     const convertToCoords = async q => {
         const fetchCoords = await fetch(
-            `${process.env.REACT_APP_GEO_URL}/geocode?q=${q}&api_key=${process.env.REACT_APP_GEO_KEY}`
+            `${process.env.GEO_URL}/geocode?q=${q}&api_key=${process.env.GEO_KEY}`
         ).then(res => res.json());
 
         return fetchCoords.results[0].location;

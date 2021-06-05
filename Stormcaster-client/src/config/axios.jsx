@@ -2,18 +2,18 @@ import axios from 'axios';
 
 export const dJAPI = axios.create({
     method: 'get',
-    baseURL: `${process.env.REACT_APP_DJOKES}`,
+    baseURL: `${process.env.DJOKES}`,
     headers: { 'User-Agent': 'Stormcaster', Accept: 'application/json' },
 });
 
 export const oWAPI = axios.create({
     method: 'get',
-    baseURL: `${process.env.REACT_APP_OWM_URL}`,
+    baseURL: `${process.env.OWM_URL}`,
 });
 
 export const geoAPI = axios.create({
     method: 'get',
-    baseURL: `${process.env.REACT_APP_GEO_URL}`,
+    baseURL: `${process.env.GEO_URL}`,
 });
 
 export const backendPOST = axios.create({

@@ -8,7 +8,6 @@ import {
     DialogTitle,
 } from '@material-ui/core';
 import { SuperContext } from '../state/SuperContext';
-import CurrentForecast from '../components/weather/CurrentForecast';
 import RegistrationForm from '../components/RegistrationForm';
 
 let isGeolocationSupported = false;
@@ -77,7 +76,6 @@ const Home = () => {
                     </p>
                 </>
             )}
-            <CurrentForecast />
             <Dialog
                 id="reg-form"
                 open={regFormOpen}

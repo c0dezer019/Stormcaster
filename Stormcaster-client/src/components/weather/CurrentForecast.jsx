@@ -23,7 +23,7 @@ const CurrentForecast = () => {
         }
 
         const localeData = await fetch(
-            `${process.env.REACT_APP_GEO_URL}/${type}?q=${q}&api_key=${process.env.REACT_APP_GEO_KEY}`
+            `${process.env.GEO_URL}/${type}?q=${q}&api_key=${process.env.GEO_KEY}`
         ).then(res => res.json());
 
         const { city, state, zip } = localeData.results[0].address_components;
@@ -38,7 +38,7 @@ const CurrentForecast = () => {
 
     const fetchData = async () => {
         const wthrData = await oWAPI({
-            url: `/onecall?lat=${coords.lat}&lon=${coords.lng}&units=imperial&appid=${process.env.REACT_APP_OWM_KEY3}`,
+            url: `/onecall?lat=${coords.lat}&lon=${coords.lng}&units=imperial&appid=${process.env.OWM_KEY}`,
         });
         const msgData = await dJAPI();
 
@@ -48,8 +48,8 @@ const CurrentForecast = () => {
 
     useEffect(async () => {
         if (Object.keys(coords).length) {
-            fetchData();
-            getLocation('reverse', `${coords.lat},${coords.lng}`);
+            await fetchData();
+            await getLocation('reverse', `${coords.lat},${coords.lng}`);
         }
     }, [coords]);
 

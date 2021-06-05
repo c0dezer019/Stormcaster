@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
 import {
     AppBar,
     Badge,
@@ -9,6 +10,7 @@ import {
     MenuItem,
     Toolbar,
 } from '@material-ui/core';
+
 import {
     AccountCircle,
     Menu as MenuIcon,
