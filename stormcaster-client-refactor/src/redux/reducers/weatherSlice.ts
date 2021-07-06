@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { RootState, AppThunk } from '../app/store';
 
 /* Weather will be accessible from most parts of the application so instead of
  *  */
@@ -30,7 +29,6 @@ export const weatherSlice = createSlice({
    name: 'weather',
    initialState,
    reducers: {},
-   extraReducers: builder => {}
 });
 
 export default weatherSlice.reducer;

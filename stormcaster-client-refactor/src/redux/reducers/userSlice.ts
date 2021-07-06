@@ -1,15 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../app/store';
 
 export interface UserState {
-   lastLogin: {} | Date;
-   location: object | string;
+   lastLogin: Date;
+   location: string;
    loggedIn: boolean;
 }
 
 const initialState: UserState = {
    location: '',
-   lastLogin: {},
+   lastLogin: new Date,
    loggedIn: false, // Confirms the user login is valid.
 };
 
@@ -17,7 +16,6 @@ const userSlice = createSlice({
    name: 'user',
    initialState,
    reducers: {},
-   extraReducers: builder => {}
 });
 
 export default userSlice.reducer;
