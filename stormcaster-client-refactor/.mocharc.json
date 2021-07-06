@@ -1,0 +1,12 @@
+{
+  "extension": [
+    "ts"
+  ],
+  "spec": [
+    "tests/**/*.spec.ts",
+    "tests/**/*.spec.tsx",
+    "tests/**/*.test.ts",
+    "tests/**/*.test.tsx"
+  ],
+  "require": "tests/babel-register.js"
+}

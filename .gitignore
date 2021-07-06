@@ -1,3 +1,5 @@
-Stormcaster.code-workspace
+*.code-workspace
 .idea
 /*/node_modules/*
+No-need
+Stormcaster-client
