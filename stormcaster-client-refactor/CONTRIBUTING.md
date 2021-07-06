@@ -1,14 +1,14 @@
 # Contributing
 
-Thank you for your contribution! If you'd like to help refine this project, then perform the following steps:
+Thank you for your contribution! If you'd like to help refine and create this project, then perform the following steps:
 
 1. Clone this repo:
 
-    `git clone https://github.com/c0dezer019/Battleship.git`
+    `git clone https://github.com/c0dezer0-apps/Stormcaster.git`
 
 2. Self-assign an [issue](https://github.com/c0dezer019/Battleship/issues) you're interested in working on.
 
-3. Create a branch with the following format: `name_task`
+3. Create a branch from `submain` with the following format: `name_task`.
 
     `git branch -b name_task`
 
