@@ -1,6 +1,6 @@
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const interpolate = require('interpolate-html-plugin');
+import path from 'path';
+import HtmlWebPackPlugin from 'html-webpack-plugin';
+import InterpolateHtmlPlugin from 'interpolate-html-plugin';
 
 module.exports = {
    entry: './src/index.tsx',
@@ -35,7 +35,7 @@ module.exports = {
       new HtmlWebPackPlugin({
          template: './public/index.html',
       }),
-      new interpolate({
+      new InterpolateHtmlPlugin({
          PUBLIC_URL: 'static',
       }),
    ],
