@@ -39,6 +39,7 @@ module.exports = {
       'no-use-before-define': 0,
       'react/prop-types': 0,
       '@typescript-eslint/no-explicit-any': 0,
+      '@typescript-eslint/no-var-requires': 0,
       'array-element-newline': [
          'error',
          {
