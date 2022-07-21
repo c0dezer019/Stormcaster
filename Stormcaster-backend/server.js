@@ -5,8 +5,6 @@ const express = require('express');
 const routes = require('./routes');
 const cors = require('cors');
 const session = require('express-session');
-// const MongoStore = require('connect-mongo')(session)
-// const isLoggedIn = require('./middleware/isLoggedIn');
 const passport = require('./passport');
 
 const port = process.env.PORT || 4000;
@@ -18,25 +16,30 @@ app.use(express.json());
 // middleware - cors
 const corsOptions = {
 	// from which URLs do we want to accept requests
-	origin: ['http://localhost:3000'],
+	origin: ['http://localhost:3000', 'https://stormcaster.vercel.app'],
 	credentials: true, // allow the session cookie to be sent to and from the client
 	optionsSuccessStatus: 204,
 };
 
+
+const sess = {
+	secret: "catsOfDoom",
+	cookie: {
+		maxAge: 1000 * 60 * 60 * 24,
+	},
+	saveUninitialized: false,
+}
+
+if (app.get('env') === 'production') {
+	app.set('trust proxy', 1);
+	sess.cookie.secure = true;
+	sess.cookie.sameSite = true;
+}
+
 app.use(cors(corsOptions));
 
 // middleware - session config
-app.use(
-	session({
-		// session is stored in the DB
-		secret: process.env.SECRET,
-		resave: false, // will not resave sessions
-		saveUninitialized: false, // only create a session when a property is added to the session
-		cookie: {
-			maxAge: 1000 * 60 * 60 * 24,
-		},
-	})
-);
+app.use(session(sess));
 
 // middleware - passport config
 app.use(passport.initialize());
