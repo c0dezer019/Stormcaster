@@ -10,7 +10,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.3.0",
-    "axios": "^0.27.2",
+    "axios": "^0.21.2",
     "bootstrap": "^5.2.0",
     "formik": "^2.2.9",
     "js-cookie": "^3.0.1",
