@@ -39,7 +39,7 @@ const CurrentForecast = () => {
 
     const fetchData = async () => {
         const wthrData = await oWAPI({
-            url: `/onecall?lat=${coords.lat}&lon=${coords.lng}&units=imperial&appid=${process.env.REACT_APP_OWM_KEY3}`,
+            url: `/weather?lat=${coords.lat}&lon=${coords.lng}&units=imperial&appid=${process.env.REACT_APP_OWM_KEY3}`,
         });
         const msgData = await dJAPI();
 
