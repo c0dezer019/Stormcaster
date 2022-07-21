@@ -23,17 +23,13 @@ const corsOptions = {
 
 
 const sess = {
-	secret: "catsOfDoom",
+	secret: process.env.secret,
 	cookie: {
 		maxAge: 1000 * 60 * 60 * 24,
+		secure: true,
+		sameSite: true,
 	},
 	saveUninitialized: false,
-}
-
-if (app.get('env') === 'production') {
-	app.set('trust proxy', 1);
-	sess.cookie.secure = true;
-	sess.cookie.sameSite = true;
 }
 
 app.use(cors(corsOptions));
