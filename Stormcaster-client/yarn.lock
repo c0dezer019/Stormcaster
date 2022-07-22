@@ -99,7 +99,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/eslint-parser@npm:^7.16.3":
+"@babel/eslint-parser@npm:^7.16.3, @babel/eslint-parser@npm:^7.18.9":
   version: 7.18.9
   resolution: "@babel/eslint-parser@npm:7.18.9"
   dependencies:
@@ -6486,6 +6486,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-jsx@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "eslint-plugin-jsx@npm:0.1.0"
+  dependencies:
+    eslint-plugin-react: 3.4.2
+    html-tags: 1
+    svg-tags: 1
+  checksum: c056005ebfe316737bea10080d72d0114bf23276ad4e285d60d4f26495a087fa934e6ab0cef1497fdecd87268e1f8cecb0bab908e0646b7d2d3fcee876c5160e
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-prettier@npm:^4.2.1":
   version: 4.2.1
   resolution: "eslint-plugin-prettier@npm:4.2.1"
@@ -6507,6 +6518,13 @@ __metadata:
   peerDependencies:
     eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
   checksum: 23001801f14c1d16bf0a837ca7970d9dd94e7b560384b41db378b49b6e32dc43d6e2790de1bd737a652a86f81a08d6a91f402525061b47719328f586a57e86c3
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-react@npm:3.4.2":
+  version: 3.4.2
+  resolution: "eslint-plugin-react@npm:3.4.2"
+  checksum: 7b9d50f9a1d630914d2834e0dea8361808b1af9ffbb7b229e02e37c0760e0bcb80d5bbf6c2bc6c16820c66b90dbabd6b404fd4b1910fca308022f9d90900989d
   languageName: node
   linkType: hard
 
@@ -7603,6 +7621,13 @@ __metadata:
   bin:
     html-minifier-terser: cli.js
   checksum: ac52c14006476f773204c198b64838477859dc2879490040efab8979c0207424da55d59df7348153f412efa45a0840a1ca3c757bf14767d23a15e3e389d37a93
+  languageName: node
+  linkType: hard
+
+"html-tags@npm:1":
+  version: 1.2.0
+  resolution: "html-tags@npm:1.2.0"
+  checksum: c4d314997bedd91355dd12e1fc11188b3ec4ab7088974b4d2935950bb571694f9b7164e47edfee46d6b5aced3c57322e0077168d4705e5a191ca54a635621f97
   languageName: node
   linkType: hard
 
@@ -10410,6 +10435,7 @@ __metadata:
   resolution: "pern-client@workspace:."
   dependencies:
     "@babel/core": ^7.18.9
+    "@babel/eslint-parser": ^7.18.9
     "@babel/preset-react": ^7.18.6
     "@hookform/resolvers": ^2.9.6
     "@material-ui/core": ^4.12.4
@@ -10424,6 +10450,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-babel: ^5.3.1
     eslint-plugin-import: ^2.26.0
+    eslint-plugin-jsx: ^0.1.0
     eslint-plugin-jsx-a11y: ^6.6.1
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-react: ^7.30.1
@@ -13257,6 +13284,13 @@ __metadata:
   version: 2.0.4
   resolution: "svg-parser@npm:2.0.4"
   checksum: b3de6653048212f2ae7afe4a423e04a76ec6d2d06e1bf7eacc618a7c5f7df7faa5105561c57b94579ec831fbbdbf5f190ba56a9205ff39ed13eabdf8ab086ddf
+  languageName: node
+  linkType: hard
+
+"svg-tags@npm:1":
+  version: 1.0.0
+  resolution: "svg-tags@npm:1.0.0"
+  checksum: 407e5ef87cfa2fb81c61d738081c2decd022ce13b922d035b214b49810630bf5d1409255a4beb3a940b77b32f6957806deff16f1bf0ce1ab11c7a184115a0b7f
   languageName: node
   linkType: hard
 

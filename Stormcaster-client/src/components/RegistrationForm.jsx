@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -54,7 +54,7 @@ const schema = yup.object().shape({
 ============================================= */
 
 const RegistrationForm = props => {
-    const history = useHistory();
+    const history = useNavigate();
     const { currentUser, setCurrentUser } = useContext(SuperContext);
 
     const { register, handleSubmit, errors } = useForm({
@@ -63,7 +63,6 @@ const RegistrationForm = props => {
 
     const onSubmit = async (data, e) => {
         e.preventDefault();
-        console.log(data);
         const user = await UserModel.create({
             username: data.username,
             password: data.password,
@@ -72,9 +71,7 @@ const RegistrationForm = props => {
         });
         setCurrentUser(user)
         localStorage.setItem('id', user.id)
-        console.log(localStorage)
-        history.push('/');
-        console.log(currentUser)
+        history('/');
     };
 
     /*   useEffect(() => {

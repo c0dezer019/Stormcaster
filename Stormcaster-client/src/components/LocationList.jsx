@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, withStyles } from '@material-ui/core';
 import LocationModel from '../models/location';
 import LocationCard from './subcomponents/LocationCard';
@@ -16,7 +16,7 @@ const styles = {
 
 const LocationList = props => {
     const { classes } = props
-    const history = useHistory();
+    const history = useNavigate();
     const [location, setLocation] = useState([]);
 
     const fetchLocations = async () => {
@@ -33,7 +33,7 @@ const LocationList = props => {
         const del = await LocationModel.delete({
             ...data
         })
-        history.push('/locations')
+        history('/locations')
     }
 
     useEffect(() => {

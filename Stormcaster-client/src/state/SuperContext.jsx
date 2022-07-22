@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useMemo, createContext } from 'react';
 
 export const SuperContext = createContext({
     coords: {},
@@ -57,9 +57,11 @@ export const SuperProvider = ({ children }) => {
         setRegFormOpen,
         setWeatherData,
     };
+
+    const val = useMemo(() => value, [value]);
 	
 	return (
-		<SuperContext.Provider value={value}>
+		<SuperContext.Provider value={val}>
 			{children}
 		</SuperContext.Provider>
 	)

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
@@ -8,11 +8,11 @@ import Login from '../pages/Login';
 import { SuperContext } from '../state/SuperContext';
 import Locations from '../pages/Locations';
 
-const Routes = ({ storeUser }) => {
+const Routing = ({ storeUser }) => {
     const { currentUser } = useContext(SuperContext);
-	
+
 	return (
-        <Switch>
+        <Routes>
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
             <Route path="/register" component={FormContainer} />
@@ -29,8 +29,8 @@ const Routes = ({ storeUser }) => {
                     );
                 }}
             />
-        </Switch>
+        </Routes>
     );
 };
 
-export default Routes;
+export default Routing;

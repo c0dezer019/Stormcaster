@@ -67,14 +67,12 @@ const Home = () => {
     return (
         <Container maxWidth="xl">
             {isGeolocationSupported ? null : (
-                <>
-                    <p>
-                        Geolocation is not supported by this browser, please
-                        supply you location manually or enable it if it is
-                        turned off to get automatic current weather for current
-                        location.
-                    </p>
-                </>
+                <p>
+                    Geolocation is not supported by this browser, please
+                    supply you location manually or enable it if it is
+                    turned off to get automatic current weather for current
+                    location.
+                </p>
             )}
             <CurrentForecast />
             <Dialog id="reg-form" open={regFormOpen} onClose={handleClose} aria-labelledby="form-title" >

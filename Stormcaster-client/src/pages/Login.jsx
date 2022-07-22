@@ -1,10 +1,10 @@
 /* eslint-disable consistent-return */
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import UserModel from '../models/user';
 
 const Login = ({ storeUser }) => {
-    const history = useHistory();
+    const history = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -28,7 +28,7 @@ const Login = ({ storeUser }) => {
 					return false;
 				}
 				storeUser(data.user);
-				history.push('/profile');
+				history('/profile');
 			})
 			.catch((err) => console.log(err));
     };
