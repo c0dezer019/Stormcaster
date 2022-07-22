@@ -36,8 +36,8 @@ app.use(csrfProtection, (req, res, next) => {
 });
 
 // middleware - API routes
-app.use(csrfProtection, '/api/v1/weather', routes.weatherData);
-app.use(csrfProtection, '/api/v1/auth', routes.auth);
+app.use('/api/v1/weather', routes.weatherData);
+app.use('/api/v1/auth', routes.auth);
 
 // connection
 app.listen(port, () => console.log(`Server is running on port ${port}`));

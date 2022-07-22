@@ -1600,28 +1600,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pern-backend@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "pern-backend@workspace:."
-  dependencies:
-    axios: ^0.27.2
-    bcrypt: ^5.0.1
-    body-parser: ^1.20.0
-    cookie-parser: ^1.4.6
-    cors: ^2.8.5
-    csurf: ^1.11.0
-    dotenv: ^16.0.1
-    express: ^4.18.1
-    express-session: ^1.17.3
-    mongoose: ^6.4.6
-    morgan: ^1.10.0
-    passport: ^0.6.0
-    passport-local: ^1.0.0
-    pg: ^8.7.3
-    sequelize: ^6.21.3
-  languageName: unknown
-  linkType: soft
-
 "pg-connection-string@npm:^2.5.0":
   version: 2.5.0
   resolution: "pg-connection-string@npm:2.5.0"
@@ -2088,6 +2066,28 @@ __metadata:
   checksum: c469b9519de16a4bb19600205cffb39ee471a5f17b82589757ca7bd40a8d92ebb6ed9f98b5a540c5d302ccbc78f15dc03cc0280dd6e00df1335568a5d5758a5c
   languageName: node
   linkType: hard
+
+"stormcaster-backend@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "stormcaster-backend@workspace:."
+  dependencies:
+    axios: ^0.27.2
+    bcrypt: ^5.0.1
+    body-parser: ^1.20.0
+    cookie-parser: ^1.4.6
+    cors: ^2.8.5
+    csurf: ^1.11.0
+    dotenv: ^16.0.1
+    express: ^4.18.1
+    express-session: ^1.17.3
+    mongoose: ^6.4.6
+    morgan: ^1.10.0
+    passport: ^0.6.0
+    passport-local: ^1.0.0
+    pg: ^8.7.3
+    sequelize: ^6.21.3
+  languageName: unknown
+  linkType: soft
 
 "string-width@npm:^1.0.2 || 2 || 3 || 4, string-width@npm:^4.2.3":
   version: 4.2.3
