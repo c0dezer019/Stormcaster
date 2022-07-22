@@ -3,7 +3,7 @@ import axios from 'axios';
 export const dJAPI = axios.create({
 	method: 'get',
     baseURL: `${process.env.REACT_APP_DJOKES}`,
-	headers: {'User-Agent': 'Stormcaster', 'Accept': 'application/json'}
+	headers: {'Accept': 'application/json'}
 });
 
 export const oWAPI = axios.create({

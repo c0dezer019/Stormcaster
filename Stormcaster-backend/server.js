@@ -4,45 +4,31 @@ require(__dirname + '/config/config.js')[process.env.DB_PASS];
 const express = require('express');
 const routes = require('./routes');
 const cors = require('cors');
-const session = require('express-session');
+const csrf = require('csurf');
+const cookieParser = require('cookie-parser');
 const passport = require('./passport');
 
 const port = process.env.PORT || 4000;
 const app = express();
 
-// middleware - JSON parsing
+// middleware
 app.use(express.json());
 
-// middleware - cors
 const corsOptions = {
 	// from which URLs do we want to accept requests
 	origin: ['http://localhost:3000', 'https://stormcaster.vercel.app'],
 	credentials: true, // allow the session cookie to be sent to and from the client
 	optionsSuccessStatus: 204,
 };
+const csrfProtection = csrf({ cookie: true });
 
-
-const sess = {
-	secret: process.env.secret,
-	cookie: {
-		maxAge: 1000 * 60 * 60 * 24,
-		secure: true,
-		sameSite: true,
-	},
-	saveUninitialized: false,
-}
-
+app.use(cookieParser());
 app.use(cors(corsOptions));
-
-// middleware - session config
-app.use(session(sess));
-
-// middleware - passport config
 app.use(passport.initialize());
 app.use(passport.session());
 
 // middleware for logged in user
-app.use((req, res, next) => {
+app.use(csrfProtection, (req, res, next) => {
 	// before every route, attach the flash messages and current user to res.locals
 	// res.locals.alerts = req.flash();
 	res.locals.currentUser = req.user;
@@ -50,8 +36,8 @@ app.use((req, res, next) => {
 });
 
 // middleware - API routes
-app.use('/api/v1/weather', routes.weatherData);
-app.use('/api/v1/auth', routes.auth);
+app.use(csrfProtection, '/api/v1/weather', routes.weatherData);
+app.use(csrfProtection, '/api/v1/auth', routes.auth);
 
 // connection
 app.listen(port, () => console.log(`Server is running on port ${port}`));

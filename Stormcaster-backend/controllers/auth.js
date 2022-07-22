@@ -1,5 +1,4 @@
-const db = require('../models')
-const bcrypt = require('bcrypt')
+const db = require('../models');
 
 const login = (req, res) => {
   console.log('req.user here >>>>>>>>>>>', req.username)
@@ -34,7 +33,6 @@ const register = (req, res) => {
     }).then((newUser)=> {
       res.json(newUser)
     })
-    
   })
 }
 
