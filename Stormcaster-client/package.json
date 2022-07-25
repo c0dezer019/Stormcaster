@@ -23,7 +23,7 @@
     "react-hook-form": "^7.33.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "react-spring": "^9.5.1",
+    "react-spring": "^9.5.2",
     "react-transition-group": "^4.4.2",
     "yup": "^0.32.11"
   },
