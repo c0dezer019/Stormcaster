@@ -1982,12 +1982,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hookform/resolvers@npm:^2.9.6":
-  version: 2.9.6
-  resolution: "@hookform/resolvers@npm:2.9.6"
+"@hookform/resolvers@npm:^2.9.10":
+  version: 2.9.10
+  resolution: "@hookform/resolvers@npm:2.9.10"
   peerDependencies:
     react-hook-form: ^7.0.0
-  checksum: 23463eab50f4081b8ae0d9a7475b7cad7454c8b94a5685036455c0b6dfe7bc3e0c33cba2cb1956d2358eadcb12b3e3afebb4b16e3ca974ccfa91026a14e44455
+  checksum: ae3395372d6ff11506a72bb6b3c57046bd14b457c2fe1f0485f60cf2dba0ef4484e3a2fb5a0f6a217f6d701393ebc3683a2ede7c81c6f13e71f965f520c7af16
   languageName: node
   linkType: hard
 
@@ -10437,7 +10437,7 @@ __metadata:
     "@babel/core": ^7.18.9
     "@babel/eslint-parser": ^7.18.9
     "@babel/preset-react": ^7.18.6
-    "@hookform/resolvers": ^2.9.6
+    "@hookform/resolvers": ^2.9.10
     "@material-ui/core": ^4.12.4
     "@material-ui/icons": ^4.11.3
     "@testing-library/jest-dom": ^5.16.4
