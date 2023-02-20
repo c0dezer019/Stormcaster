@@ -1705,12 +1705,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.7.6":
+"@babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.7.6":
   version: 7.18.9
   resolution: "@babel/runtime@npm:7.18.9"
   dependencies:
     regenerator-runtime: ^0.13.4
   checksum: 36dd736baba7164e82b3cc9d43e081f0cb2d05ff867ad39cac515d99546cee75b7f782018b02a3dcf5f2ef3d27f319faa68965fdfec49d4912c60c6002353a2e
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.20.7":
+  version: 7.20.13
+  resolution: "@babel/runtime@npm:7.20.13"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 09b7a97a05c80540db6c9e4ddf8c5d2ebb06cae5caf3a87e33c33f27f8c4d49d9c67a2d72f1570e796045288fad569f98a26ceba0c4f5fad2af84b6ad855c4fb
   languageName: node
   linkType: hard
 
@@ -2567,21 +2576,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:^2.11.5, @popperjs/core@npm:^2.9.2":
+"@popperjs/core@npm:^2.11.6":
+  version: 2.11.6
+  resolution: "@popperjs/core@npm:2.11.6"
+  checksum: 47fb328cec1924559d759b48235c78574f2d71a8a6c4c03edb6de5d7074078371633b91e39bbf3f901b32aa8af9b9d8f82834856d2f5737a23475036b16817f0
+  languageName: node
+  linkType: hard
+
+"@popperjs/core@npm:^2.9.2":
   version: 2.11.5
   resolution: "@popperjs/core@npm:2.11.5"
   checksum: fd7f9dca3fb716d7426332b6ee283f88d2724c0ab342fb678865a640bad403dfb9eeebd8204a406986162f7e2b33394f104320008b74d0e9066d7322f70ea35d
   languageName: node
   linkType: hard
 
-"@react-aria/ssr@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@react-aria/ssr@npm:3.2.0"
+"@react-aria/ssr@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "@react-aria/ssr@npm:3.4.1"
   dependencies:
-    "@babel/runtime": ^7.6.2
+    "@swc/helpers": ^0.4.14
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 30468b436f9d56636eb3fb89cbbbf861c55ad841e255e529d225a0efd9c23628badaee72c42ab3870b5f17a9d5b5163564a64e9b928565230a090cb4f7de23bf
+  checksum: 3421951446d1b8d3d5c9903cb098ee7a8058185d1bcfd1f04d8a3341958f5d2241f3d2f1232d8ddb46cd0fef9cfc6d39dd4a19bf3a64131e81ba21c57e80eda8
   languageName: node
   linkType: hard
 
@@ -2727,23 +2743,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@restart/ui@npm:^1.2.0":
-  version: 1.3.0
-  resolution: "@restart/ui@npm:1.3.0"
+"@restart/ui@npm:^1.4.1":
+  version: 1.6.1
+  resolution: "@restart/ui@npm:1.6.1"
   dependencies:
-    "@babel/runtime": ^7.18.3
-    "@popperjs/core": ^2.11.5
-    "@react-aria/ssr": ^3.2.0
+    "@babel/runtime": ^7.20.7
+    "@popperjs/core": ^2.11.6
+    "@react-aria/ssr": ^3.4.1
     "@restart/hooks": ^0.4.7
     "@types/warning": ^3.0.0
-    dequal: ^2.0.2
+    dequal: ^2.0.3
     dom-helpers: ^5.2.0
     uncontrollable: ^7.2.1
     warning: ^4.0.3
   peerDependencies:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
-  checksum: f12a33d87555856ceb6855c53425df2ce1b75d88d314bfd3f149a4d1eb908751807bfb6d6d78773e5646787182bba99202e40a0831c1b83c655b1a143dfa7fb5
+  checksum: 7b6387f19c15a8e84bb7f6ffdb70587a4668fa0a0cf2f72731df7b179b295e20983e3d2d8d50909a49eeaa921cc0130bc81030249f3eccaa423f4cf29805bac3
   languageName: node
   linkType: hard
 
@@ -2977,6 +2993,15 @@ __metadata:
     "@svgr/plugin-svgo": ^5.5.0
     loader-utils: ^2.0.0
   checksum: 540391bd63791625d26d6b5e0dd3c716ef51176bfba53bf0979a1ac4781afd2672f4bef2d76cf3d9cdc8e9ee61bda6863ed405a237b10406633ede4cd524f1cc
+  languageName: node
+  linkType: hard
+
+"@swc/helpers@npm:^0.4.14":
+  version: 0.4.14
+  resolution: "@swc/helpers@npm:0.4.14"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 273fd3f3fc461a92f3790cc551ea054745c6d6959afbe1232e6d7aa1c722bbc114d308aab96bef5c78fc0303c85c7b472ef00e2253251cc89737f3b1af56e5a5
   languageName: node
   linkType: hard
 
@@ -5760,7 +5785,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dequal@npm:^2.0.2":
+"dequal@npm:^2.0.2, dequal@npm:^2.0.3":
   version: 2.0.3
   resolution: "dequal@npm:2.0.3"
   checksum: 8679b850e1a3d0ebbc46ee780d5df7b478c23f335887464023a631d1b9af051ad4a6595a44220f9ff8ff95a8ddccf019b5ad778a976fd7bbf77383d36f412f90
@@ -10460,7 +10485,7 @@ __metadata:
     prettier: ^2.7.1
     prop-types: ^15.8.1
     react: ^18.2.0
-    react-bootstrap: ^2.4.0
+    react-bootstrap: ^2.7.2
     react-datepicker: ^4.8.0
     react-dom: ^18.2.0
     react-geolocated: ^4.0.3
@@ -11679,13 +11704,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-bootstrap@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "react-bootstrap@npm:2.4.0"
+"react-bootstrap@npm:^2.7.2":
+  version: 2.7.2
+  resolution: "react-bootstrap@npm:2.7.2"
   dependencies:
     "@babel/runtime": ^7.17.2
     "@restart/hooks": ^0.4.6
-    "@restart/ui": ^1.2.0
+    "@restart/ui": ^1.4.1
     "@types/react-transition-group": ^4.4.4
     classnames: ^2.3.1
     dom-helpers: ^5.2.1
@@ -11702,7 +11727,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 63c520b83ff23a73229f068ec93997581e4a34bdba06f694770cd5cd0648be5625065640c1232de522f8d249a5b57262e9a4aebb294a62b59f6375026ae3df37
+  checksum: 656c0c5e44cadf8037a387b489e3928342d71ecd6b3b1aae80e7dc367d88cbe64af0cbba656f07391b9d4a22779a93bb2ff87682de6e5b3ff3e660293e17d27a
   languageName: node
   linkType: hard
 
@@ -12094,6 +12119,13 @@ __metadata:
   version: 1.4.2
   resolution: "regenerate@npm:1.4.2"
   checksum: 3317a09b2f802da8db09aa276e469b57a6c0dd818347e05b8862959c6193408242f150db5de83c12c3fa99091ad95fb42a6db2c3329bfaa12a0ea4cbbeb30cb0
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.13.11":
+  version: 0.13.11
+  resolution: "regenerator-runtime@npm:0.13.11"
+  checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
   languageName: node
   linkType: hard
 
@@ -13620,6 +13652,13 @@ __metadata:
   version: 2.1.0
   resolution: "tslib@npm:2.1.0"
   checksum: aa189c8179de0427b0906da30926fd53c59d96ec239dff87d6e6bc831f608df0cbd6f77c61dabc074408bd0aa0b9ae4ec35cb2c15f729e32f37274db5730cb78
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.4.0":
+  version: 2.5.0
+  resolution: "tslib@npm:2.5.0"
+  checksum: ae3ed5f9ce29932d049908ebfdf21b3a003a85653a9a140d614da6b767a93ef94f460e52c3d787f0e4f383546981713f165037dc2274df212ea9f8a4541004e1
   languageName: node
   linkType: hard
 
